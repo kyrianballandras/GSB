@@ -1,0 +1,103 @@
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes backgroundAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: linear-gradient(-45deg, #2e4053, #3a5068, #5bc0be, #6fffe9);
+    background-size: 400% 400%;
+    animation: backgroundAnimation 15s ease infinite;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #f5f5f5;
+}
+
+/* EN-TÊTE */
+header {
+    background-color: rgba(46, 64, 83, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    padding: 25px;
+    width: 90%;
+    max-width: 800px;
+    text-align: center;
+    margin-top: 30px;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+h2 {
+    color: #1c2833;
+    font-size: 1.8rem;
+    text-align: center;
+    margin: 25px 0;
+    animation: fadeInUp 1s ease-out;
+}
+
+/* BOUTON RETOUR */
+.menu {
+    display: inline-block;
+    padding: 10px 24px;
+    background-color: #1c2833;
+    color: #fff;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.menu:hover {
+    background-color: #34495e;
+    transform: scale(1.05);
+}
+
+/* SECTION PRÉSENTATION */
+#presentation {
+    background-color: rgba(255, 255, 255, 0.92);
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    padding: 30px;
+    margin: 30px 20px;
+    max-width: 850px;
+    text-align: justify;
+    color: #2e4053;
+    animation: fadeInUp 1.2s ease-out;
+}
+
+.present {
+    line-height: 1.7;
+    font-size: 1.1rem;
+}
+
+/* PIED DE PAGE */
+footer {
+    margin-top: auto;
+    text-align: center;
+    background-color: #2e4053;
+    color: #f8f8f8;
+    padding: 1rem 0;
+    width: 100%;
+    box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.2);
+    font-size: 0.95rem;
+}

@@ -1,0 +1,43 @@
+/* Animations et styles spécifiques veilletech */
+:root{
+  --accent:#38bdf8;
+  --muted:#9aa8b6;
+  --card-bg: rgba(255,255,255,0.02);
+  --glass: rgba(255,255,255,0.03);
+  --toast-bg: rgba(15,23,42,0.95);
+}
+
+/* reveal scroll */
+.reveal { opacity:0; transform:translateY(18px); transition:all .6s cubic-bezier(.2,.9,.3,1); will-change:transform,opacity; }
+.reveal.in { opacity:1; transform:translateY(0); }
+
+/* typing effect */
+.hero-title { font-family: "Courier New", monospace; font-size:1.4rem; margin:0 0 8px 0; }
+.typing { border-right:2px solid rgba(255,255,255,0.14); padding-right:6px; white-space:nowrap; display:inline-block; animation: blink-caret .8s steps(1) infinite; }
+@keyframes blink-caret { 50% { border-color: transparent } }
+
+/* floating logo */
+.floating-logo img { animation: floatLogo 5s ease-in-out infinite; transform-origin:center; }
+@keyframes floatLogo { 0%{ transform:translateY(0) rotate(0deg)} 50%{ transform:translateY(-8px) rotate(3deg)} 100%{ transform:translateY(0) rotate(0deg)} }
+
+/* particles container */
+#particles-root { position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden }
+.particle { position:absolute; border-radius:50%; opacity:0.08; mix-blend-mode:screen; animation: rise 10s linear infinite; filter: blur(6px); }
+@keyframes rise { to { transform:translateY(-140vh) scale(1.2); opacity:0 } }
+
+/* notes area */
+.notes-area { width:100%; min-height:200px; padding:12px; border-radius:8px; border:1px solid rgba(255,255,255,0.04); background:var(--card-bg); color:inherit; resize:vertical; }
+
+/* save button animation */
+.save-btn { position:relative; overflow:hidden; transition:transform .18s; }
+.save-btn:active { transform:translateY(2px) }
+
+/* toast */
+.toast { position:fixed; right:18px; bottom:18px; background:var(--toast-bg); color:#fff; padding:10px 14px; border-radius:8px; box-shadow:0 8px 24px rgba(2,6,23,0.6); opacity:0; transform:translateY(12px); transition:all .35s ease; pointer-events:none; z-index:60 }
+.toast.show { opacity:1; transform:translateY(0); pointer-events:auto }
+
+/* small responsive tweaks */
+@media (max-width:700px){
+  .hero-title { font-size:1.15rem; }
+  .floating-logo img { width:48px;height:48px }
+}

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Kyrian Ballandras — Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="assets/image/moi.png">
+  <link rel="stylesheet" href="assets/css/portfolio.css">
+  <style>
+    /* Styles rapides pour les trois points / menu contextual */
+    .project { position: relative; overflow: hidden; border-radius: 8px; }
+    .project .project-meta { position: absolute; top: 8px; right: 8px; z-index: 5; }
+    .dots-btn {
+      background: rgba(0,0,0,0.45); color: #fff; border: none; padding:6px 8px;
+      border-radius:6px; cursor:pointer;
+    }
+    .dots-menu {
+      display:none;
+      position:absolute;
+      top:36px; right:0;
+      background: rgba(10,12,18,0.96);
+      color:#fff;
+      border-radius:8px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      min-width:160px;
+      overflow:hidden;
+      font-size:14px;
+    }
+    .dots-menu.active { display:block; }
+    .dots-menu a {
+      display:block; padding:10px 12px; text-decoration:none; color:inherit;
+      border-bottom:1px solid rgba(255,255,255,0.04);
+    }
+    .dots-menu a:last-child { border-bottom: none; }
+    .dots-menu a:hover { background: rgba(255,255,255,0.03); }
+    .project img { width:100%; height:200px; object-fit:cover; display:block; border-radius:6px; }
+    @media (min-width:900px) {
+      .project img { height:220px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header card">
+    <div class="container header-inner">
+      <nav>
+         <ul class="menu">
+        <li><a href="#introduction">Introduction</a></li>
+        <li><a href="presentation personnel.html">Présentation personnelle</a></li>
+        <li><a href="projet.html">Mes Projets </a></li>
+        <li><a href="compétences.html">Compétences</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <!-- bouton thème supprimé -->
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="hero" class="hero card">
+      <div class="hero-content">
+        <h1>Kyrian Ballandras<br><span>Développeur / Veille technologique</span></h1>
+        <img src="assets/image/moi.png" alt="Photo de Kyrian">
+        <div class="arrow-down" title="Descendre"></div>
+      </div>
+    </section>
+
+    <section id="introduction" class="card intro fade-up">
+      <h2>Introduction</h2>
+      <p>
+        Étudiant / développeur passionné par l'IA appliquée à l'automobile, la cybersécurité et les interfaces web.
+        Ce portfolio présente mes compétences, projets et une page dédiée à ma veille sur l'IA automobile.
+      </p>
+    </section>
+
+    <section id="competences" class="card">
+      <h2>Compétences</h2>
+      <div class="cards">
+        <div class="card"><h3>Programmation</h3><p>PHP, JavaScript, Python, SQL</p></div>
+        <div class="card"><h3>IA / ML</h3><p>TensorFlow, scikit-learn, PyTorch</p></div>
+        <div class="card"><h3>Web</h3><p>HTML5, CSS3, responsive, animations</p></div>
+        <div class="card"><h3>Outils</h3><p>Git, Docker, VS Code, XAMPP</p></div>
+      </div>
+    </section>
+
+    <section id="projets" class="card">
+      <h2>Projets</h2>
+      <div class="project-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;">
+        <!-- Projet 1 -->
+        <article class="project">
+          <div class="project-meta">
+            <button class="dots-btn" aria-expanded="false" aria-haspopup="true" title="Actions">⋯</button>
+            <div class="dots-menu" role="menu">
+              <a href="veille-iaautomobile.html" role="menuitem">Voir la veille</a>
+              <a href="#" role="menuitem">Détails</a>
+              <a href="#" role="menuitem">Voir sur GitHub</a>
+            </div>
+          </div>
+          <a href="veille-ia-automobile.html" class="project-link" style="text-decoration:none;color:inherit;">
+            <img src="assets/image/ia-auto.png" alt="Veille IA automobile">
+            <div style="padding:12px;">
+              <h3>Veille — IA Automobile</h3>
+              <p>Analyse des avancées en perception, décision et sécurité pour véhicules autonomes.</p>
+            </div>
+          </a>
+        </article>
+
+        <!-- Projet 2 -->
+        <article class="project">
+          <div class="project-meta">
+            <button class="dots-btn" aria-expanded="false" aria-haspopup="true" title="Actions">⋯</button>
+            <div class="dots-menu" role="menu">
+              <a href="#" role="menuitem">Voir</a>
+              <a href="#" role="menuitem">Détails</a>
+              <a href="#" role="menuitem">Voir sur GitHub</a>
+            </div>
+          </div>
+          <a href="#" class="project-link" style="text-decoration:none;color:inherit;">
+            <img src="assets/image/project2.png" alt="Projet 2">
+            <div style="padding:12px;">
+              <h3>Projet Web</h3>
+              <p>Application de gestion — PHP / MySQL, interface responsive et sécurisée.</p>
+            </div>
+          </a>
+        </article>
+
+        <!-- Projet 3 -->
+        <article class="project">
+          <div class="project-meta">
+            <button class="dots-btn" aria-expanded="false" aria-haspopup="true" title="Actions">⋯</button>
+            <div class="dots-menu" role="menu">
+              <a href="#" role="menuitem">Voir</a>
+              <a href="#" role="menuitem">Détails</a>
+              <a href="#" role="menuitem">Voir sur GitHub</a>
+            </div>
+          </div>
+          <a href="#" class="project-link" style="text-decoration:none;color:inherit;">
+            <img src="assets/image/project3.png" alt="Projet 3">
+            <div style="padding:12px;">
+              <h3>Maintenance Outils Informatique</h3>
+              <p>Porjet Pour mon BacPro</p>
+            </div>
+          </a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <?= date('Y') ?> Kyrian Ballandras — Portfolio</p>
+    </div>
+  </footer>
+
+  <script>
+    // JS léger pour gérer les menus "trois points"
+    document.addEventListener('click', function(e){
+      // fermer tous les menus si clic en dehors
+      if (!e.target.closest('.project')) {
+        document.querySelectorAll('.dots-menu').forEach(m => m.classList.remove('active'));
+        document.querySelectorAll('.dots-btn').forEach(b => b.setAttribute('aria-expanded', 'false'));
+        return;
+      }
+      const project = e.target.closest('.project');
+      const btn = project.querySelector('.dots-btn');
+      const menu = project.querySelector('.dots-menu');
+      if (e.target === btn || btn.contains(e.target)) {
+        const active = menu.classList.toggle('active');
+        btn.setAttribute('aria-expanded', active ? 'true' : 'false');
+      }
+    });
+
+    // Fermer menu avec Escape
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.dots-menu').forEach(m => m.classList.remove('active'));
+        document.querySelectorAll('.dots-btn').forEach(b => b.setAttribute('aria-expanded', 'false'));
+      }
+    });
+  </script>
+</body>
+</html>
