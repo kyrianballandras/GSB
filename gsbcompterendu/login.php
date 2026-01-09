@@ -11,13 +11,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($login === "" || $password === "") {
         $errors[] = "Tous les champs sont requis.";
     } else {
-        $stmt = $pdo->prepare("SELECT * FROM visiteur WHERE login = ? LIMIT 1");
+        $stmt = $pdo->prepare("SELECT * FROM visiteur WHERE login = ? LIMIT 10");
         $stmt->execute([$login]);
         $user = $stmt->fetch();
 
         if (!$user || !password_verify($password, $user["password"])) {
             $errors[] = "Email ou mot de passe incorrect.";
-        } else {
+        } 
+        if ($user['role'] === 'administrateur' || $user['role'] === 'admin') {
+            $_SESSION["id"] = $user["id"];
+            $_SESSION["name"] = $user["prenom"];
+            $_SESSION["surname"] = $user["nom"];
+            $_SESSION["role"] = $user["role"];
+        header("Location: welcome.php");
+        }
+       
+        else {
             header("Location: welcome.php");
             $_SESSION["id"] = $user["id"];
             $_SESSION["name"] = $user["prenom"];
@@ -43,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <div class="col-md-4 p-4 border rounded bg-white shadow">
 
         <h3 class="text-center mb-4">Connexion</h3>
-        <img src="assets/image/logo.jpg" alt=" logo" width="200" height="200" >
+        <img src="assets/image/logo.jpg" alt=" logo" width="400" height="300" >
 
         <?php foreach ($errors as $e): ?>
             <div class="alert alert-danger"><?= htmlspecialchars($e) ?></div>

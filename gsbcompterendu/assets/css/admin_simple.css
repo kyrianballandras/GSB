@@ -1,0 +1,16 @@
+/* CSS simple pour la page d'administration (léger, lisible) */
+html,body{height:100%;margin:0;font-family:Arial,Helvetica,sans-serif;background:#f4f6f8;color:#222}
+.navbar{background:#2b6ea3;padding:10px}
+.navbar .navbar-brand{color:#fff;font-weight:700}
+.container{max-width:720px;margin:36px auto;padding:0 16px}
+.card{background:#fff;border-radius:8px;padding:18px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+.card-header{background:#2b6ea3;color:#fff;padding:12px;border-radius:6px 6px 0 0}
+.card-body{padding:16px}
+.form-label{display:block;margin-bottom:6px;font-weight:600}
+.form-control{width:100%;padding:10px;border:1px solid #ddd;border-radius:6px;margin-bottom:12px}
+.form-select{width:100%;padding:10px;border:1px solid #ddd;border-radius:6px;margin-bottom:12px}
+.btn{display:inline-block;padding:10px 14px;border-radius:6px;background:#2b6ea3;color:#fff;border:0;cursor:pointer}
+.alert{padding:10px 12px;border-radius:6px;margin-bottom:12px}
+.alert-danger{background:#fdecea;color:#8a1f14;border:1px solid #f1b0ab}
+.alert-success{background:#edf7ed;color:#1b6d2e;border:1px solid #bfe6bf}
+@media (max-width:600px){.container{margin:20px auto;padding:0 12px}}

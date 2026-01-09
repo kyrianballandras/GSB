@@ -1,4 +1,8 @@
+
+<!---
+
 <?php
+/*
 session_start();
 $user_name = htmlspecialchars($_SESSION['user_name']);
 if (!isset($_SESSION['user_id'])) {
@@ -12,7 +16,7 @@ if (!isset($_SESSION['user_id'])) {
 <head>
     <meta charset="UTF-8">
     <title>Espace membre</title>
-    <img src="assets/image/logo.jpg" alt=" logo" width="200" height="200" > 
+    <img src="assets/image/logo.jpg" alt=" logo" width="400" height="200" > 
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -62,11 +66,11 @@ if (!isset($_SESSION['user_id'])) {
 </head>
 <body>
     <div class="container">
-        <h2>Bienvenue, <?php echo $user_name; ?> </h2>
+        <h2>Bienvenue, <?php echo $user_name; ?> </h2><!-- nom du compte -->
         <p>Vous êtes maintenant connecté à votre espace membre.</p>
         <p><a href="profile.php">Voir mon profil</a></p> <!-- lien vers le profil -->
-        <p><a href="settings.php">Paramètres du compte</a></p> 
-        <a href="logout.php">Se déconnecter</a>
+        <p><a href="settings.php">Paramètres du compte</a></p> <!-- lien vers les parametres -->
+        <a href="logout.php">Se déconnecter</a><!-- lien vers se deco -->
     </div>
 </body>
-</html>
+</html> -->

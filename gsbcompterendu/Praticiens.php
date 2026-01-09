@@ -23,8 +23,7 @@ if ($search != "") {
 } else {
     $praticiens = $pdo->query("SELECT * FROM praticien ORDER BY nom ASC")->fetchAll(PDO::FETCH_ASSOC);
 }
-
-// GESTION DES DÉTAILS - Logique imbriquée
+ 
 $selectedPraticien = null;
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -32,94 +31,81 @@ if (isset($_GET['id'])) {
     $detailStmt->execute([$id]);
     $selectedPraticien = $detailStmt->fetch(PDO::FETCH_ASSOC);
     if ($selectedPraticien) {
-        $search = ''; // On efface la recherche si on affiche les détails
+        $search = ''; //  efface la recherche , affiche les détails
     }
 }
 ?>
+
+</style>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>Liste Praticiens GSB</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        input, button { padding: 8px; font-size: 14px; }
+        button { cursor: pointer; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+        th { background-color: #f0f0f0; }
+        a { text-decoration: none; color: blue; }
+    </style>
 </head>
-<body class="bg-light">
+<body>
 
-<nav class="navbar navbar-dark bg-dark">
-    <div class="container-fluid">
-        <span class="navbar-brand h1">Praticiens (GSB)</span>
-        <a href="welcome.php" class="btn btn-warning float-end">Retour</a>
-    </div>
-</nav>
-
-<div class="container mt-4">
-
-    <h2 class="text-center mb-3">Recherche Praticiens</h2>
-
-    <form method="GET" class="mb-4 p-3 border rounded bg-white">
-        <div class="row g-2 align-items-center">
-            <div class="col-8">
-                <input type="text" name="search" class="form-control" placeholder="Rechercher (Nom/Prénom/Ville)..."
-                       value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
-            </div>
-            <div class="col-auto">
-                <button class="btn btn-primary" type="submit">Go</button>
-            </div>
-            <div class="col-auto">
-                <a href="praticiens.php" class="btn btn-danger">Reset</a>
-            </div>
-        </div>
-    </form>
-
-    <?php if ($selectedPraticien): ?>
-    <div class="card border-info mb-4">
-        <div class="card-header bg-info text-white">
-            <h5>Détails de <?= htmlspecialchars($selectedPraticien["nom"]) ?></h5>
-        </div>
-        <div class="card-body">
-            <p><strong>Prénom:</strong> <?= htmlspecialchars($selectedPraticien["prenom"]) ?></p>
-            <p><strong>Adresse Complète:</strong> <?= htmlspecialchars($selectedPraticien["adresse"]) ?>, <?= htmlspecialchars($selectedPraticien["cp"]) ?> <?= htmlspecialchars($selectedPraticien["ville"]) ?></p>
-            <p><strong>Notoriété:</strong> <?= htmlspecialchars($selectedPraticien["coef_notoriete"]) ?></p>
-            <a href="praticiens.php" class="btn btn-sm btn-secondary">X Fermer</a>
-        </div>
-    </div>
-    <?php endif; ?>
-
-    <table class="table table-bordered table-sm">
-        <thead class="table-secondary">
-            <tr>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Ville</th>
-                <th>Notoriété</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php 
-            // BOUCLE D'AFFICHAGE
-            if (empty($praticiens)) {
-                echo '<tr><td colspan="5" class="text-center">Pas de résultats.</td></tr>';
-            } else {
-                foreach ($praticiens as $p) {
-                    ?>
-                    <tr>
-                        <td><?= htmlspecialchars($p["nom"]) ?></td>
-                        <td><?= htmlspecialchars($p["prenom"]) ?></td>
-                        <td><?= htmlspecialchars($p["ville"]) ?></td>
-                        <td><?= htmlspecialchars($p["coef_notoriete"]) ?></td>
-                        <td>
-                            <a href="praticiens.php?id=<?= $p["id"] ?>" class="btn btn-sm btn-success">Détails</a>
-                        </td>
-                    </tr>
-                    <?php
-                }
-            }
-            ?>
-        </tbody>
-    </table>
-
+<div style="display: flex; justify-content: space-between; align-items: center;">
+    <h1 style="color: #3498db;">Praticiens (GSB)</h1>
+    <a href="welcome.php"><button style="padding: 12px 24px; font-size: 16px;">Retour</button></a>
 </div>
+
+<h2>Recherche</h2>
+<form method="GET">
+    <input type="text" name="search" placeholder="Nom, Prénom ou Ville..." value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
+    <button type="submit">Chercher</button>
+    <a href="praticiens.php"><button type="button">Réinitialiser</button></a>
+</form>
+
+<?php if ($selectedPraticien): ?>
+<div style="border: 1px solid #ccc; padding: 15px; margin: 15px 0;">
+    <h3><?= htmlspecialchars($selectedPraticien["nom"]) ?></h3>
+    <p><strong>Prénom:</strong> <?= htmlspecialchars($selectedPraticien["prenom"]) ?></p>
+    <p><strong>Adresse:</strong> <?= htmlspecialchars($selectedPraticien["adresse"]) ?>, <?= htmlspecialchars($selectedPraticien["cp"]) ?> <?= htmlspecialchars($selectedPraticien["ville"]) ?></p>
+    <p><strong>Notoriété:</strong> <?= htmlspecialchars($selectedPraticien["coef_notoriete"]) ?></p>
+    <a href="praticiens.php"><button>Fermer</button></a>
+</div>
+<?php endif; ?>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Ville</th>
+            <th>Notoriété</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php 
+        if (empty($praticiens)) {
+            echo '<tr><td colspan="5">Pas de résultats.</td></tr>';
+        } else {
+            foreach ($praticiens as $p) {
+                ?>
+                <tr>
+                    <td><?= htmlspecialchars($p["nom"]) ?></td>
+                    <td><?= htmlspecialchars($p["prenom"]) ?></td>
+                    <td><?= htmlspecialchars($p["ville"]) ?></td>
+                    <td><?= htmlspecialchars($p["coef_notoriete"]) ?></td>
+                    <td><a href="praticiens.php?id=<?= $p["id"] ?>">Détails</a></td>
+                </tr>
+                <?php
+            }
+        }
+        ?>
+    </tbody>
+</table>
 
 </body>
 </html>

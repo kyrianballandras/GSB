@@ -1,0 +1,67 @@
+/* Styles personnalisés pour la page produits */
+.container {
+    max-width: 900px; /*tableau*/
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 25px 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #3498db;
+}
+
+.alert {
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+.alert-danger {
+    background: #fdecea;
+    color: #c0392b;
+    border: 1px solid #f5c6cb;
+}
+.alert-success {
+    background: #eaf6ff;
+    color: #1f618d;
+    border: 1px solid #b8daff;
+}
+
+.btn {
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    text-decoration: none;
+    display: inline-block;
+    transition: opacity 0.2s;
+}
+.btn-primary, .btn-secondary {
+    background: #3498db;
+    color: #fff;
+    margin-bottom: 20px;
+}
+.btn-danger { background: #e74c3c; color: white; }
+.btn-warning { background: #f39c12; color: white; }
+.btn:hover { opacity: 0.8; }
+
+.table-custom {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+.table-custom th, .table-custom td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+.table-custom th {
+    background-color: #f8f9fa;
+    color: #333;
+    font-weight: 600;
+}
+.table-custom tr:hover { background-color: #fcfcfc; }
