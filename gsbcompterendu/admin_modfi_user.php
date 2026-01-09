@@ -3,7 +3,7 @@ session_start();
 require_once "bdd.php";
 $errors = [];
 $success = '';
-/* Sécurité : seul un admin peut accéder */
+/*   admin  acced */
 if (!isset($_SESSION['role'])) {
     header("Location: login.php");
     exit;
@@ -14,7 +14,7 @@ if ($role != "admin" && $role != "administrateur") {
     exit;
 }
 
-/* Traitement du formulaire */
+/* Traite du formulaire */
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // suppression
     if (isset($_POST['delete_user']) && !empty($_POST['user_id'])) {
@@ -44,8 +44,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } catch (PDOException $e) {
                 $errors[] = "Erreur lors de la mise à jour du rôle : " . $e->getMessage();
             }
+         }
         }
-    }
 }
 ?>  
 <!DOCTYPE html>
@@ -58,6 +58,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div class="container mt-5">
         <h1>Modifier l'utilisateur</h1>
+
+
+
 
         <?php if (!empty($errors)): ?>
             <div class="alert alert-danger">
@@ -73,12 +76,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         <?php endif; ?>
 
+
+
         <form method="POST" action="admin_modfi_user.php">
             <div class="mb-3">
                 <label for="user_id" class="form-label">ID de l'utilisateur :</label>
-                <input type="number" class="form-control" id="user_id" name="user_id" required>
-            </div>
-
+                <input type="number" class="form-control" id="user_id" name="user_id" required></div>
             <div class="mb-3">
                 <label for="new_role" class="form-label">Nouveau rôle</label>
                 <select name="new_role" id="new_role" class="form-control">
@@ -88,11 +91,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <option value="delegue">Délégué</option>
                 </select>
             </div>
-
             <div style="display:flex;gap:8px;align-items:center">
                 <button type="submit" name="change_role" class="btn btn-primary">Modifier le rôle</button>
-                <a href="admin_dashboard.php" class="btn btn-secondary" style="margin-left:8px">Retour au tableau de bord</a>
-            </div>
+                <a href="admin_dashboard.php" class="btn btn-secondary" style="margin-left:8px">Retour au tableau de bord</a></div>
         </form>
     </div>
     <style>

@@ -39,11 +39,8 @@ $crs = $sql->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <title>Mes comptes rendus</title>
 </head>
-
 <body>
-
 <h2>Mes comptes-rendus</h2>
-
 
 <?php if (isset($_GET['ok'])) echo "<p>Compte-rendu ajouté ✔</p>"; ?>
 
@@ -52,10 +49,11 @@ $crs = $sql->fetchAll(PDO::FETCH_ASSOC);
         <th>Date visite</th>
         <th>Praticien</th>
         <?php if ($role !== 'visiteur'): ?>
-            <th>Visiteur</th>
+                  <th>Visiteur</th>
         <?php endif; ?>
         <th>Voir</th>
     </tr>
+
 
     <?php foreach($crs as $cr): ?>
         <tr>
@@ -67,7 +65,11 @@ $crs = $sql->fetchAll(PDO::FETCH_ASSOC);
             <td><a href="cr_view.php?id=<?= urlencode($cr['id']) ?>">Voir</a></td>
         </tr>
     <?php endforeach; ?>
+
+
+
 </table>
+
 <a href="welcome.php"><button style="padding: 12px 24px; font-size: 16px;">Retour</button></a>
 <style>
   body{

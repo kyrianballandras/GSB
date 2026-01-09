@@ -9,7 +9,7 @@ if (!isset($_SESSION['id'])) {
 // ajout du produit: accessible aux responsable / admin
 $message = '';
 $role = $_SESSION['role'] ?? '';
-if (in_array($role, ['responsable','admin','administrateur']) && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_produit'])) {
+if (in_array($role, ['responsable','administrateur']) && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_produit'])) {
     $nom = trim($_POST['nom'] ?? '');
     $composition = trim($_POST['composition'] ?? '');
     $effets = trim($_POST['effets'] ?? '');

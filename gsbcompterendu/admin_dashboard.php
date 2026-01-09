@@ -3,7 +3,7 @@ session_start();
 require_once "bdd.php";
 $errors = [];
 $success = "";
-/* Sécurité : seul un admin peut accéder */ 
+/* seul un admin peut acced */ 
 if (!isset($_SESSION['role'])) {
     header("Location: login.php");
     exit;
@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = trim($_POST['password'] ?? '');
     $roleUser = $_POST["role"] ?? "visiteur";
 
-    /* Vérifications */
+    /* Verif */
     if ($nom == "" || $prenom == "" || $login == "" || $password == "") {
         $errors[] = "Tous les champs doivent être remplis.";
     }
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "Le mot de passe doit contenir au moins 6 caractères.";
     }
 
-    /* Insertion */
+    
     
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $userId = $_POST["user_id"];
@@ -45,9 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $success = "Utilisateur supprimé avec succès.";
     } catch (PDOException $e) {
         $errors[] = "Erreur lors de la suppression de l'utilisateur.";
-    }
-}
-}
+    }}}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,8 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gérer les utilisateurs</title>
 </head>
-<body>
-    <div class="container mt-5">
+<body><div class="container mt-5">
         <h1 class="titres">Gérer les utilisateurs</h1>
         <a href="welcome.php"><button class="retor" style="padding: 12px 24px; font-size: 16px;">Retour</button>
 </a>
@@ -91,15 +88,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <td><?= htmlspecialchars($user['role']) ?></td>
                         <td>
                             <form method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">
-                                <input type="hidden" name="user_id" value="<?= htmlspecialchars($user['id']) ?>">
-                                <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
-                                <a href="admin_modfi_user.php?user_id=<?= htmlspecialchars($user['id']) ?>" class="btn btn-warning btn-sm">Modifier</a>
+                            <input type="hidden" name="user_id" value="<?= htmlspecialchars($user['id']) ?>">
+                            <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                            <a href="admin_modfi_user.php?user_id=<?= htmlspecialchars($user['id']) ?>" class="btn btn-warning btn-sm">Modifier</a>
                             </form>
-                        </td>
-                    </tr>
+                        </td> </tr>
                  <?php endforeach; ?>
-            </tbody>
-        </table>
+                </tbody>
+             </table>
     </div>
     <style>
        
@@ -133,7 +129,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             border: 1px solid #b8daff;
         }
 
-        
+
 
         .btn {
             padding: 8px 14px;

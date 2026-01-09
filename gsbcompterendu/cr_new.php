@@ -42,34 +42,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Compte-rendu de Visite</title>
-    <style>
-        *{box-sizing:border-box}
-        html,body{margin:0;padding:0;font-family:"Segoe UI",Roboto,Arial,sans-serif;background:#f5f5f5;color:#333}
-        .container{max-width:700px;margin:40px auto;background:#fff;padding:40px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.1)}
-        h1{margin:0 0 30px 0;font-size:28px;color:#333;border-bottom:3px solid #3498db;padding-bottom:15px}
-        .form-group{margin-bottom:20px}
-        label{display:block;margin-bottom:6px;font-weight:600;color:#333}
-        input[type="text"],input[type="date"],select,textarea{width:100%;padding:10px 12px;border:1px solid #ddd;border-radius:6px;font-size:14px;font-family:inherit}
-        input[type="text"]:focus,input[type="date"]:focus,select:focus,textarea:focus{outline:none;border-color:#3498db;box-shadow:0 0 4px rgba(52,152,219,0.2)}
-        textarea{resize:vertical}
-        h3,h4{margin:25px 0 15px 0;font-size:16px;color:#333}
-        .produit-group{display:grid;grid-template-columns:1fr 80px;gap:12px;align-items:flex-end;margin-bottom:12px}
-        .produit-group label{margin:0}
-        .produit-group input{margin:0}
-        button{width:100%;padding:12px;background:linear-gradient(90deg,#3498db,#2980b9);color:#fff;border:0;border-radius:6px;font-weight:700;font-size:16px;cursor:pointer;transition:transform .2s,box-shadow .2s;margin-top:20px}
-        button:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(52,152,219,0.3)}
-        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:15px}
-        .form-row .form-group{margin-bottom:0}
-        .back-link{display:inline-block;margin-bottom:20px;color:#3498db;text-decoration:none;font-weight:600}
-        .back-link:hover{text-decoration:underline;color:#2980b9}
-    </style>
+
 </head>
 <body>
     <div class="container">
         <a href="welcome.php" class="back-link">← Retour</a>
-        
         <h1>Saisir le Compte-rendu de Visite</h1>
-
         <form method="POST">
             <div class="form-row">
                 <div class="form-group">
@@ -81,13 +59,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <?php endforeach; ?>
                     </select>
                 </div>
-
                 <div class="form-group">
                     <label for="date_v">Date de visite *</label>
                     <input type="date" name="date_visite" id="date_v" required>
                 </div>
             </div>
-
             <div class="form-row">
                 <div class="form-group">
                     <label for="motif">Motif de la visite *</label>
@@ -99,16 +75,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <option value="autre">Autre chose</option>
                     </select>
                 </div>
-
-                <div class="form-group">
+                <div class="formuuu">
                     <label for="remplacant">Remplaçant (si absent)</label>
                     <input type="text" name="remplacant" id="remplacant" placeholder="Nom complet">
                 </div>
             </div>
-
             <h3>Produits présentés (max 2)</h3>
             <div class="form-row">
-                <div class="form-group">
+                <div class="formuuu">
                     <label for="prod1">Produit 1</label>
                     <select name="produit1" id="prod1">
                         <option value=""> Aucun </option>
@@ -117,8 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <?php endforeach; ?>
                     </select>
                 </div>
-
-                <div class="form-group">
+                <div class="formuuu">
                     <label for="prod2">Produit 2</label>
                     <select name="produit2" id="prod2">
                         <option value=""> Aucun </option>
@@ -128,7 +101,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </select>
                 </div>
             </div>
-
             <h3>Distribution des Échantillons</h3>
             <?php foreach($produits as $prod): ?>
                 <div class="produit-group">
@@ -137,7 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </div>
             <?php endforeach; ?>
 
-            <div class="form-group">
+            <div class="formuuu">
                 <label for="bilan">Bilan de la visite </label>
                 <textarea name="bilan" id="bilan" rows="5" required placeholder="Résumé de la visite, observations..."></textarea>
             </div>
@@ -145,5 +117,30 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <button type="submit"> VALIDER LA SAISIE</button>
         </form
     </div>
+    <style>
+        *{box-sizing:border-box}
+        html,body{margin:0;padding:0;font-family:"Segoe UI",Roboto,Arial,sans-serif;background:#f5f5f5;color:#333}
+        .container{max-width:700px;margin:40px auto;background:#fff;padding:40px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.1)}
+        h1{margin:0 0 30px 0;font-size:28px;color:#333;border-bottom:3px solid #3498db;padding-bottom:15px}
+        .formuuu{margin-bottom:20px}
+        label{display:block;margin-bottom:6px;font-weight:600;color:#333}
+        input[type="text"],input[type="date"],select,textarea{width:100%;padding:10px 12px;border:1px solid #ddd;border-radius:6px;font-size:14px;font-family:inherit}
+        input[type="text"]:focus,input[type="date"]:focus,select:focus,textarea:focus{outline:none;border-color:#3498db;box-shadow:0 0 4px rgba(52,152,219,0.2)}
+        textarea{resize:vertical}
+
+        h3,h4{margin:25px 0 15px 0;font-size:16px;color:#333}
+        .produit-group{display:grid;grid-template-columns:1fr 80px;gap:12px;align-items:flex-end;margin-bottom:12px}
+        .produit-group label{margin:0}
+
+        .produit-group input{margin:0}
+
+        button{width:100%;padding:12px;background:linear-gradient(90deg,#3498db,#2980b9);color:#fff;border:0;border-radius:6px;font-weight:700;font-size:16px;cursor:pointer;transition:transform .2s,box-shadow .2s;margin-top:20px}
+        button:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(52,152,219,0.3)}
+
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+        .form-row .form-group{margin-bottom:0}
+        .back-link{display:inline-block;margin-bottom:20px;color:#3498db;text-decoration:none;font-weight:600}
+        .back-link:hover{text-decoration:underline;color:#2980b9}
+    </style>
 </body>
 </html>

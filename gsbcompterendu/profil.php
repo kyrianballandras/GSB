@@ -18,28 +18,6 @@ if (!$user) {
 
 
 ?>
-<?php
-// Traitement du formulaire d'ajout produit pour les responsables / admins
-$message = '';
-if (in_array($user['role'] ?? '', ['responsable', 'admin', 'administrateur']) && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_produit'])) {
-    $nom = trim($_POST['nom'] ?? '');
-    $composition = trim($_POST['composition'] ?? '');
-    $effets = trim($_POST['effets'] ?? '');
-    $contre = trim($_POST['contre_indications'] ?? '');
-
-    if ($nom === '') {
-        $message = '<div class="alert alert-danger">Le nom du produit est requis.</div>';
-    } else {
-        try {
-            $ins = $pdo->prepare('INSERT INTO produit (nom, composition, effets, contre_indications) VALUES (?, ?, ?, ?)');
-            $ins->execute([$nom, $composition, $effets, $contre]);
-            $message = '<div class="alert alert-success">Produit ajouté avec succès.</div>';
-        } catch (Exception $e) {
-            $message = '<div class="alert alert-danger">Erreur lors de l\'ajout : ' . htmlspecialchars($e->getMessage()) . '</div>';
-        }
-    }
-}
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,41 +30,15 @@ if (in_array($user['role'] ?? '', ['responsable', 'admin', 'administrateur']) &&
         <h1>Profil (GSB)</h1>
         <a href="welcome.php"><button class="boutton">Retour</button></a>
     </div>
-    
+    </nav>
     <div class="gsb">
         <h2>Profil</h2>
         <p><strong>Rôle :</strong> <?= htmlspecialchars($user['role'] ?? '') ?></p>
         <p><strong>Nom :</strong> <?= htmlspecialchars($user['nom']) ?></p>
         <p><strong>Prénom :</strong> <?= htmlspecialchars($user['prenom']) ?></p>
     </div>
-    
-    <?php if (in_array($user['role'] ?? '', ['responsable', 'admin', 'administrateur'])): ?>
-    <div class="gsb" style="max-width:700px; margin:20px auto;">
-        <h3>Ajouter un produit</h3>
-        <?= $message ?>
-        <form method="post">
-            <div style="margin-bottom:8px;">
-                <label>Nom</label><br>
-                <input type="text" name="nom" required style="width:100%; padding:8px;" />
-            </div>
-            <div style="margin-bottom:8px;">
-                <label>Composition</label><br>
-                <textarea name="composition" rows="3" style="width:100%; padding:8px;"></textarea>
-            </div>
-            <div style="margin-bottom:8px;">
-                <label>Effets</label><br>
-                <textarea name="effets" rows="2" style="width:100%; padding:8px;"></textarea>
-            </div>
-            <div style="margin-bottom:12px;">
-                <label>Contre-indications</label><br>
-                <textarea name="contre_indications" rows="2" style="width:100%; padding:8px;"></textarea>
-            </div>
-            <button type="submit" name="add_produit" class="boutton">Ajouter le produit</button>
-        </form>
-    </div>
-    <?php endif; ?>
     <style>
-        .profil-gsb{
+        .profil{
             display:flex;
             justify-content:space-between;
             align-items:center;
@@ -100,6 +52,7 @@ if (in_array($user['role'] ?? '', ['responsable', 'admin', 'administrateur']) &&
             margin:0;
             color:#3498db;
             font-size:32px;
+            text-align: center;
         }
         
         .boutton{

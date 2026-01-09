@@ -24,7 +24,7 @@ if (in_array($role_raw, ['responsable','admin','administrateur'])) {
             $pctLast = round($lastMonth / $total * 100, 1);
         }
     } catch (Exception $e) {
-        // ignore erreurs de stats
+        // ignore ereur des state 
     }
 }
 $name  = htmlspecialchars($_SESSION['name'] ?? '');
@@ -104,7 +104,7 @@ $role  = htmlspecialchars($_SESSION['role'] ?? '');
         </section>  
 
 
-        
+
         <section class="h33rd">
         <h3>Informations</h3>
         <?php if (in_array($role_raw, ['responsable','admin','administrateur'])): ?>
