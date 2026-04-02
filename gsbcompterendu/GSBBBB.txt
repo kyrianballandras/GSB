@@ -1,0 +1,37 @@
+php creation de garage
+faire les voiture cree dedans les propriété
+augmenter avec chaque constructeur et en destruction decrementer la quantité des voiture 
+self this parent 3 mot clé 
+this l'instance courante de classe 
+utilisation this est employé dans les méthodes d'une classe 
+self reference a la classe courante 
+parent pareil reference a la classe parent 
+
+je doit enlever le faite de pouvoir crée un compte au debut car c'est a l'admin de cree ses identifiant
+fait le login admin visiteur et praticien a finir 
+et fini 
+porte folio 
+délégue responsabel admin visiteur
+statistique a faire
+
+$stmt = $pdo->prepare('SELECT nom, prenom, role FROM responsable WHERE id = ?');
+$stmt->execute([$_SESSION['id']]);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+if (!$user) {
+    echo 'Utilisateur introuvable';
+    exit;
+}
+$stmt = $pdo->prepare('SELECT nom, prenom, role FROM delegue WHERE id = ?');
+$stmt->execute([$_SESSION['id']]);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+if (!$user) {
+    echo 'Utilisateur introuvable';
+    exit;
+}
+$stmt = $pdo->prepare('SELECT nom, prenom, role FROM administrateur WHERE id = ?');
+$stmt->execute([$_SESSION['id']]);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+if (!$user) {
+    echo 'Utilisateur introuvable';
+    exit;
+}

@@ -28,7 +28,6 @@ if (!$user) {
 <body>
     <div class="profil-gsb">
         <h1>Profil (GSB)</h1>
-        <a href="welcome.php"><button class="boutton">Retour</button></a>
     </div>
     </nav>
     <div class="gsb">
@@ -37,6 +36,7 @@ if (!$user) {
         <p><strong>Nom :</strong> <?= htmlspecialchars($user['nom']) ?></p>
         <p><strong>Prénom :</strong> <?= htmlspecialchars($user['prenom']) ?></p>
     </div>
+     <a href="welcome.php"><button class="boutton">Retour</button></a>
     <style>
         .profil{
             display:flex;
@@ -48,21 +48,26 @@ if (!$user) {
         }
         
         h1{
-            font-family:Arial,sans-serif;
-            margin:0;
-            color:#3498db;
-            font-size:32px;
-            text-align: center;
+            color:#fff;
+    background-color: #3498db;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    margin-bottom:15px;
+    text-align: center;
         }
         
         .boutton{
-            background-color:#3498db;
-            color:white;
-            padding:10px 16px;
-            font-size:14px;
-            border:none;
-            border-radius:6px;
-            cursor:pointer;
+     display: flex;
+      margin: 15px auto;
+     padding: 12px 24px;
+     font-size: 25px;
+     background: #3498db;
+     color: white;
+     border: none;
+     border-radius: 8px;
+     cursor: pointer;
+     transition: 0.2s;
         }
         
         .gsb{

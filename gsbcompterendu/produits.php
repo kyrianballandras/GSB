@@ -38,10 +38,18 @@ if (in_array($role, ['responsable','administrateur']) && $_SERVER['REQUEST_METHO
 </head>
 <body class="bg-light">
 
-<nav class="navbar navbar-dark bg-dark">
-    <div class="container-fluid">
-        <span class="navbar-brand h1">Produit (GSB)</span>
-        <a href="welcome.php" class="btn btn-warning float-end">Retour</a>
+<nav style="color:#fff;
+    background-color: #3498db;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    margin-bottom:15px;">
+    <div class="container-fluid" 
+    style="position: relative; display: flex; align-items: center; justify-content: flex-end;">
+        <span class="navbar-brand h1" 
+        style="position: absolute; left: 50%; transform: translateX(-50%); font-size: 2rem; font-weight: 700;">Produit (GSB)</span>
+        <a href="welcome.php" 
+        style="color:#fff; text-decoration:none; font-weight:bold; background-color: #e74c3c; padding: 10px 20px;border-radius: 10px;">Retour</a>
     </div>
 </nav>
 
@@ -65,38 +73,41 @@ if (in_array($role, ['responsable','administrateur']) && $_SERVER['REQUEST_METHO
                 <td><?= nl2br(htmlspecialchars($row['composition'])) ?></td>
                 <td><?= nl2br(htmlspecialchars($row['effets'])) ?></td>
                 <td><?= nl2br(htmlspecialchars($row['contre_indications'])) ?></td>
-            </tr>
-        <?php endwhile; ?>
+            </tr><?php endwhile?>
     </tbody>
     </table>
 </div>
+<?php if (in_array($role, ['responsable','administrateur'])): ?> <?= $message ?>
 <div class="container">
     <h1>Produits</h1>
     <p>Liste des produits disponibles :</p>
-    <?php if (in_array($role, ['responsable','admin','administrateur'])): ?>
-        <?= $message ?>
         <div style="margin-bottom:18px;">
             <form method="post" class="mb-3">
                 <div style="margin-bottom:8px;">
                     <label>Nom</label><br>
-                    <input type="text" name="nom" required style="width:100%; padding:8px;" />
+                    <input type="text" name="nom" required 
+                    style="width:100%; padding:8px;" />
                 </div>
                 <div style="margin-bottom:8px;">
                     <label>Composition</label><br>
-                    <textarea name="composition" rows="2" style="width:100%; padding:8px;"></textarea>
+                    <textarea name="composition" rows="2" 
+                    style="width:100%; padding:8px;"></textarea>
                 </div>
                 <div style="margin-bottom:8px;">
                     <label>Effets</label><br>
-                    <textarea name="effets" rows="2" style="width:100%; padding:8px;"></textarea>
+                    <textarea name="effets" rows="2" 
+                    style="width:100%; padding:8px;"></textarea>
                 </div>
                 <div style="margin-bottom:8px;">
                     <label>Contre-indications</label><br>
-                    <textarea name="contre_indications" rows="2" style="width:100%; padding:8px;"></textarea>
+                    <textarea name="contre_indications" rows="2" 
+                    style="width:100%; padding:8px;"></textarea>
                 </div>
-                <button type="submit" name="add_produit" class="boutton">Ajouter le produit</button>
+                <button type="submit" name="add_produit" 
+                 style="background-color: #3498db; color: white;">Ajouter le produit</button>
             </form>
         </div>
-    <?php endif; ?>
+    <?php endif?>
 <style>
    .container {
     max-width: 900px; /*tableau*/
@@ -106,6 +117,7 @@ if (in_array($role, ['responsable','administrateur']) && $_SERVER['REQUEST_METHO
     border-radius: 10px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
+
 h1 {
     text-align: center;
     margin-bottom: 25px;

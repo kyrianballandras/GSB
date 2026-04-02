@@ -10,6 +10,10 @@ if (!isset($_SESSION['id'])) {
 $praticiens = $pdo->query("SELECT id, nom, prenom FROM praticien ORDER BY nom")->fetchAll(PDO::FETCH_ASSOC);
 $produits = $pdo->query("SELECT id, nom FROM produit ORDER BY nom")->fetchAll(PDO::FETCH_ASSOC);
 
+
+$date_min = date('Y-m-d', strtotime('-16 years'));
+$date_max = date('Y-m-d', strtotime('+30 days'));
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $id_visiteur = $_SESSION['id'];
     $praticien_id = $_POST['praticien'];
@@ -35,7 +39,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     header("Location: cr_list.php?ok");
     exit;
 }
+
+// $pdo = ta connexion PDO
+$stmt = $pdo->query("SELECT echantillon.id_produit, produit.nom FROM echantillon JOIN produit ON echantillon.id_produit = produit.id GROUP BY echantillon.id_produit, produit.nom"); 
+$medicaments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -56,12 +68,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <option value=""> Sélectionnez un praticien </option>
                         <?php foreach($praticiens as $p): ?>
                             <option value="<?= $p['id'] ?>"><?= htmlspecialchars($p['nom'] . " " . $p['prenom']) ?></option>
-                        <?php endforeach; ?>
+                        <?php endforeach ?>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="date_v">Date de visite *</label>
-                    <input type="date" name="date_visite" id="date_v" required>
+                    <label for="date_v">Date de visite </label>
+                    <input
+                    type="date"
+                    name="date_visite"
+                    id="date_v"
+                    required
+                    min="<?= $date_min ?>"
+                    max="<?= $date_max ?>">
                 </div>
             </div>
             <div class="form-row">
@@ -88,7 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <option value=""> Aucun </option>
                         <?php foreach($produits as $prod): ?>
                             <option value="<?= $prod['id'] ?>"><?= htmlspecialchars($prod['nom']) ?></option>
-                        <?php endforeach; ?>
+                        <?php endforeach ?>
                     </select>
                 </div>
                 <div class="formuuu">
@@ -97,17 +115,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <option value=""> Aucun </option>
                         <?php foreach($produits as $prod): ?>
                             <option value="<?= $prod['id'] ?>"><?= htmlspecialchars($prod['nom']) ?></option>
-                        <?php endforeach; ?>
+                        <?php endforeach ?>
                     </select>
                 </div>
             </div>
             <h3>Distribution des Échantillons</h3>
-            <?php foreach($produits as $prod): ?>
-                <div class="produit-group">
-                    <label><?= htmlspecialchars($prod['nom']) ?></label>
-                    <input type="number" name="echantillons[<?= $prod['id'] ?>]" min="0" value="0">
-                </div>
-            <?php endforeach; ?>
+            
+               <label class="form-label">Médicament</label>
+                <select name="medicament_id" class="form-select" required>
+                 <option value="" selected disabled>Choisir un médicament</option>
+             <?php foreach ($medicaments as $med): ?>
+                <option value="<?= (int)$med['id'] ?>">
+            <?= htmlspecialchars($med['nom']) ?></option>
+              <?php endforeach; ?>
+                </select>
 
             <div class="formuuu">
                 <label for="bilan">Bilan de la visite </label>

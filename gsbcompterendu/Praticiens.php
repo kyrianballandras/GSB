@@ -42,28 +42,23 @@ if (isset($_GET['id'])) {
 <head>
     <meta charset="UTF-8">
     <title>Liste Praticiens GSB</title>
-    <style>
-        body { font-family: Arial; margin: 20px; }
-        input, button { padding: 8px; font-size: 14px; }
-        button { cursor: pointer; }
-        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
-        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
-        th { background-color: #f0f0f0; }
-        a { text-decoration: none; color: blue; }
-    </style>
 </head>
 <body>
 
-<div style="display: flex; justify-content: space-between; align-items: center;">
-    <h1 style="color: #3498db;">Praticiens (GSB)</h1>
-    <a href="welcome.php"><button style="padding: 12px 24px; font-size: 16px;">Retour</button></a>
+<div class="divee">
+    <h1>Praticiens (GSB)</h1>
 </div>
 
-<h2>Recherche</h2>
+<h2 style="">Recherche</h2>
 <form method="GET">
     <input type="text" name="search" placeholder="Nom, Prénom ou Ville..." value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
-    <button type="submit">Chercher</button>
-    <a href="praticiens.php"><button type="button">Réinitialiser</button></a>
+    <button style="background-color: #3498db; color: white; border: none; border-radius: 8px; cursor: pointer; transition: 0.2s;"  >Chercher</button>
+    <a href="praticiens.php"><button style=" background: #3498db;
+     color: white;
+     border: none;
+     border-radius: 8px;
+     cursor: pointer;
+     transition: 0.2s;">Réinitialiser</button></a>
 </form>
 
 <?php if ($selectedPraticien): ?>
@@ -72,9 +67,14 @@ if (isset($_GET['id'])) {
     <p><strong>Prénom:</strong> <?= htmlspecialchars($selectedPraticien["prenom"]) ?></p>
     <p><strong>Adresse:</strong> <?= htmlspecialchars($selectedPraticien["adresse"]) ?>, <?= htmlspecialchars($selectedPraticien["cp"]) ?> <?= htmlspecialchars($selectedPraticien["ville"]) ?></p>
     <p><strong>Notoriété:</strong> <?= htmlspecialchars($selectedPraticien["coef_notoriete"]) ?></p>
-    <a href="praticiens.php"><button>Fermer</button></a>
+    <a href="praticiens.php"><button style=" background: #3498db;
+     color: white;
+     border: none;
+     border-radius: 8px;
+     cursor: pointer;
+     transition: 0.2s;">Fermer</button></a>
 </div>
-<?php endif; ?>
+<?php endif ?>
 
 <table>
     <thead>
@@ -98,7 +98,12 @@ if (isset($_GET['id'])) {
                     <td><?= htmlspecialchars($p["prenom"]) ?></td>
                     <td><?= htmlspecialchars($p["ville"]) ?></td>
                     <td><?= htmlspecialchars($p["coef_notoriete"]) ?></td>
-                    <td><a href="praticiens.php?id=<?= $p["id"] ?>">Détails</a></td>
+                    <td><a href="praticiens.php?id=<?= $p["id"] ?>"style="
+     color: 3498db;
+     border: none;
+     border-radius: 8px;
+     cursor: pointer
+     transition: 0.2s;">Détails</a></td>
                 </tr>
                 <?php
             }
@@ -106,6 +111,55 @@ if (isset($_GET['id'])) {
         ?>
     </tbody>
 </table>
+<a href="welcome.php"><button style="display: flex;
+      margin: 15px auto;
+     padding: 12px 24px;
+     font-size: 25px;
+     background: #3498db;
+     color: white;
+     border: none;
+     border-radius: 8px;
+     cursor: pointer;
+     transition: 0.2s;">Retour</button></a>
 
+ <style>
+    .divee
+    {
+        "display: flex; justify-content: space-between; align-items: center;
+    }
+        body 
+        { font-family: Arial; margin: 20px; }
+
+        input, button
+         { padding: 8px; font-size: 14px; }
+
+        h1{
+           
+    color:#fff;
+    background-color: #3498db;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    margin-bottom:15px;
+    text-align: center;
+
+        }
+        button
+         { cursor: pointer; }
+
+        table
+         { border-collapse: collapse; width: 100%; margin-top: 20px; }
+
+        th, td 
+        { border: 1px solid #ccc; padding: 10px; text-align: left; }
+
+        th 
+        { background-color: #f0f0f0; }
+
+        a
+         { text-decoration: none; color: blue; }
+        a:hover
+         { text-decoration: underline; }
+    </style>
 </body>
 </html>

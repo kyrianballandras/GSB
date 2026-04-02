@@ -56,14 +56,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body><div class="container mt-5">
         <h1 class="titres">Gérer les utilisateurs</h1>
-        <a href="welcome.php"><button class="retor" style="padding: 12px 24px; font-size: 16px;">Retour</button>
+        
 </a>
             <?php foreach ($errors as $e): ?>
                 <div class="alert alert-edanger"><?= htmlspecialchars($e) ?></div>
-            <?php endforeach; ?>
+            <?php endforeach ?>
             <?php if ($success): ?>
                 <div class="alert alert-sssuccess"><?= htmlspecialchars($success) ?></div>
-             <?php endif; ?>
+             <?php endif ?>
         <table class="table ">
             <thead>
                 <tr>
@@ -93,10 +93,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <a href="admin_modfi_user.php?user_id=<?= htmlspecialchars($user['id']) ?>" class="btn btn-warning btn-sm">Modifier</a>
                             </form>
                         </td> </tr>
-                 <?php endforeach; ?>
+                 <?php endforeach ?>
                 </tbody>
              </table>
+             
+            
     </div>
+    <a href="welcome.php"><button style="display: flex;
+      margin: 15px auto;
+     padding: 12px 24px;
+     font-size: 25px;
+     background: #3498db;
+     color: white;
+     border: none;
+     border-radius: 8px;
+     cursor: pointer;
+     transition: 0.2s;">Retour</button>
     <style>
        
         .container {
@@ -108,22 +120,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             box-shadow: 0 8px 20px rgba(0,0,0,0.08);
         }
         h1 {
-            text-align: center;
-            margin-bottom: 25px;
-            color: #3498db;
+            color:#fff;
+    background-color: #3498db;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    margin-bottom:15px;
+    text-align: center;
         }
 
-        .alert {
+      .alert {
             padding: 12px;
             border-radius: 6px;
             margin-bottom: 15px;
             font-size: 14px;
         }
-        .alert-e    danger {
+     .alert-e danger {
             background: #fdecea;
             color: #c0392b;
             border: 1px solid #f5c6cb;
-        }.alert-sssuccess {
+        }
+    .alert-sssuccess {
             background: #eaf6ff;
             color: #1f618d;
             border: 1px solid #b8daff;
@@ -131,7 +148,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-        .btn {
+    .btn {
             padding: 8px 14px;
             border-radius: 6px;
             border: none;
@@ -141,32 +158,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             display: inline-block;
             transition: opacity 0.2s;
         }
-        .btn-primary, .btn-secondary {
+     .btn-primary, .btn-secondary {
             background: #3498db;
             color: #fff;
             margin-bottom: 20px;
         }
-        .btn-danger { background: #e74c3c; color: white; }
-        .btn-warning { background: #f39c12; color: white; }
+     .btn-danger { background: #e74c3c; color: white; }
+     .btn-warning { background: #f39c12; color: white; }
         
-        .btn:hover { opacity: 0.8; }
+     .btn:hover { opacity: 0.8; }
 
-        .table {
+     .table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
         }
-        .table th, .table td {
+      .table th, .table td {
             text-align: left;
             padding: 12px;
             border-bottom: 1px solid #eee;
         }
-        .table th {
-            background-color: #f8f9fa;
+     .table th {
+         background-color: #f8f9fa;
             color: #333;
             font-weight: 600;
         }
-        .table tr:hover {
+     .table tr:hover {
             background-color: #fcfcfc;
         }
     </style>

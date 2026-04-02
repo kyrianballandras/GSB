@@ -23,6 +23,8 @@ $sql_e = $pdo->prepare("
     WHERE e.id_cr = ?");
 $sql_e->execute([$id]);
 $ech = $sql_e->fetchAll(PDO::FETCH_ASSOC);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -31,19 +33,16 @@ $ech = $sql_e->fetchAll(PDO::FETCH_ASSOC);
 <body>
   <div class="box">
     <h2>Compte-rendu n°<?= $cr['id'] ?></h2>
-
     <p><b>Praticien :</b> <?= $cr['nom_p']." ".$cr['prenom_p'] ?></p>
     <p><b>Date visite :</b> <?= $cr['date_visite'] ?></p>
     <p><b>Motif :</b> <?= $cr['motif'] ?></p>
     <p><b>Remplaçant :</b> <?= $cr['id_remplacant'] ?: "Aucun" ?></p>
-
     <p><b>Bilan :</b><br><?= nl2br($cr['bilan']) ?></p>
-
     <h3>Échantillons :</h3>
     <ul>
       <?php foreach($ech as $e): ?>
         <li><?= $e['nom']." : ".$e['quantite'] ?></li>
-      <?php endforeach; ?>
+      <?php endforeach ?>
     </ul>
   </div>
  <a href="welcome.php"><button class="retor" style="padding: 12px 24px; font-size: 16px;">Retour</button></a>

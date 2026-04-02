@@ -68,13 +68,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <p><?= htmlspecialchars($error) ?></p>
                 <?php endforeach; ?>
             </div>
-        <?php endif; ?>
+        <?php endif ?>
 
         <?php if (!empty($success)): ?>
             <div class="alert alert-success">
                 <p><?= htmlspecialchars($success) ?></p>
             </div>
-        <?php endif; ?>
+        <?php endif ?>
 
 
 

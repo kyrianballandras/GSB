@@ -48,29 +48,36 @@ $crs = $sql->fetchAll(PDO::FETCH_ASSOC);
     <tr>
         <th>Date visite</th>
         <th>Praticien</th>
-        <?php if ($role !== 'visiteur'): ?>
+        <?php if ($role !== 'id_visiteur'): ?>
+          
                   <th>Visiteur</th>
-        <?php endif; ?>
+        <?php endif ?>
         <th>Voir</th>
     </tr>
 
 
-    <?php foreach($crs as $cr): ?>
-        <tr>
-            <td><?= htmlspecialchars($cr['date_visite']) ?></td>
-            <td><?= htmlspecialchars($cr['nom_praticien'].' '.$cr['prenom_praticien']) ?></td>
-            <?php if ($role !== 'visiteur'): ?>
-                <td><?= htmlspecialchars(($cr['visiteur_nom'] ?? '').' '.($cr['visiteur_prenom'] ?? '')) ?></td>
-            <?php endif; ?>
-            <td><a href="cr_view.php?id=<?= urlencode($cr['id']) ?>">Voir</a></td>
-        </tr>
-    <?php endforeach; ?>
+    <?php foreach ($crs as $cr): ?>
+    <tr>
+        <td><?= htmlspecialchars($cr['date_visite']) ?></td>
+        <td><?= htmlspecialchars($cr['nom_praticien'].' '.$cr['prenom_praticien']) ?></td>
+
+        <?php if ($role !== 'id_visiteur'): ?>
+           <td>
+            <?= htmlspecialchars(($cr['visiteur_nom'] ?? '') . ' ' . ($cr['visiteur_prenom'] ?? '')) ?>
+            </td>
+        <?php endif ?>
+
+        <td>
+            <a href="cr_view.php?id=<?= urlencode($cr['id']) ?>">Voir</a>
+        </td>
+    </tr>
+<?php endforeach ?>
 
 
 
 </table>
 
-<a href="welcome.php"><button style="padding: 12px 24px; font-size: 16px;">Retour</button></a>
+<a href="welcome.php"><button>Retour</button></a>
 <style>
   body{
     font-family: Arial, sans-serif;
@@ -80,7 +87,11 @@ $crs = $sql->fetchAll(PDO::FETCH_ASSOC);
   }
 
   h2{
-    color:#3498db;
+    color:#fff;
+    background-color: #3498db;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
     margin-bottom:15px;
     text-align: center;
   }
@@ -90,11 +101,11 @@ $crs = $sql->fetchAll(PDO::FETCH_ASSOC);
   }
 
   table{
-    width:80%;
+    width:100%;
     border-collapse:collapse;
     background:#fff;
     box-shadow:0 4px 10px rgba(0,0,0,0.08);
-    border-radius:6px;
+    border-radius:16px;
     overflow:hidden;
     text-align: center;
     margin:auto;
@@ -130,21 +141,18 @@ $crs = $sql->fetchAll(PDO::FETCH_ASSOC);
     text-decoration:underline;
   }
 
-  button{
-    margin-top:15px;
-    padding:12px 24px;
-    font-size:15px;
-    background:#3498db;
-    color:white;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    transition:0.2s;
-  }
-
-  button:hover{
-    background:#2c80b4;
-  }
+ button {
+   display: flex;
+    margin: 15px auto;
+    padding: 12px 24px;
+    font-size: 25px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
 </style>
 
 </body>

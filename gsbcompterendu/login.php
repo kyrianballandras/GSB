@@ -51,24 +51,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="col-md-4 p-4 border rounded bg-white shadow">
 
+    
         <h3 class="text-center mb-4">Connexion</h3>
         <img src="assets/image/logo.jpg" alt=" logo" width="400" height="300" >
 
         <?php foreach ($errors as $e): ?>
             <div class="alert alert-danger"><?= htmlspecialchars($e) ?></div>
-        <?php endforeach; ?>
+        <?php endforeach ?>
+
 
         <form method="POST">
             <div class="mb-3">
                 <label class="form-label">Email / Login</label>
                 <input type="email" class="form-control" name="email" required>
             </div>
-
             <div class="mb-3">
                 <label class="form-label">Mot de passe</label>
                 <input type="password" class="form-control" name="password" required>
             </div>
-
             <button class="btn btn-primary w-100">Se connecter</button>
         </form>
 
