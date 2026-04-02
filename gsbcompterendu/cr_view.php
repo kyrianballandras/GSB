@@ -45,7 +45,7 @@ $ech = $sql_e->fetchAll(PDO::FETCH_ASSOC);
       <?php endforeach ?>
     </ul>
   </div>
- <a href="welcome.php"><button class="retor" style="padding: 12px 24px; font-size: 16px;">Retour</button></a>
+ <a href="welcome.php"><button>Retour</button></a>
 </body>
 
 <style>
@@ -59,11 +59,16 @@ $ech = $sql_e->fetchAll(PDO::FETCH_ASSOC);
   h2, h3{
     color:#3498db;
     margin-top:0;
+    background-color: #3498db;
+    color: #fff;
+    padding:10px;
+    border-radius:8px;
+        
   }
 
   .box{
-    max-width:700px;
-    margin:auto;
+    max-width:900px;
+    margin:125px auto;
     background:#fff;
     padding:20px;
     border-radius:8px;
@@ -83,20 +88,19 @@ $ech = $sql_e->fetchAll(PDO::FETCH_ASSOC);
   }
 
   button{
-    margin-top:15px;
-    padding:10px 18px;
-    background-color:#3498db;
-    color:white;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:15px;
-    transition:0.2s;
+    display: flex;
+    margin: 50px auto;
+    padding: 12px 24px;
+    font-size: 23px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
   }
 
-  button:hover{
-    background:#2c80b4;
-  }
+  
 </style>
 
 
