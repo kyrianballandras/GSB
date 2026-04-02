@@ -20,7 +20,7 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    background: linear-gradient(-45deg, #2e4053, #3a5068, #5bc0be, #6fffe9);
+    background-color: #1c2833;
     background-size: 400% 400%;
     animation: backgroundAnimation 15s ease infinite;
     display: flex;
@@ -29,7 +29,7 @@ body {
     color: #f5f5f5;
 }
 
-/* EN-TÊTE */
+/* en haut*/
 header {
     background-color: rgba(46, 64, 83, 0.95);
     border-radius: 12px;
@@ -72,7 +72,27 @@ h2 {
     transform: scale(1.05);
 }
 
-/* SECTION PRÉSENTATION */
+.men {
+    display:flex;
+    justify-content: center;
+    padding: 10px 42px;
+    background-color: #1c2833;
+    color: #fff;
+    border-radius: 50px;
+    box-shadow: 0 1px 2px; 
+    padding: 3px;
+    margin: 10px 2px;
+    max-width: 1000px;
+    text-decoration: none;
+    font-weight: bold;
+
+}
+.men:hover {
+    background-color: #34495e;
+    transform: scale(1.05);
+}
+
+/* sec prest */
 #presentation {
     background-color: rgba(255, 255, 255, 0.92);
     border-radius: 15px;
@@ -90,7 +110,7 @@ h2 {
     font-size: 1.1rem;
 }
 
-/* PIED DE PAGE */
+
 footer {
     margin-top: auto;
     text-align: center;

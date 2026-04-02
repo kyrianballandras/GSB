@@ -1,5 +1,5 @@
 
-/* ANIMATIONS */
+/* ANIMe */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -17,12 +17,12 @@
   100% { background-position: 0% 50%; }
 }
 
-/* FOND MODERNE ANIMÉ */
+/* fon ani*/
 body {
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(-45deg, #2e4053, #3a5068, #5bc0be, #6fffe9);
+    background-color: #1c2833;
     background-size: 400% 400%;
     animation: backgroundAnimation 15s ease infinite;
     color: #f0f0f0;
@@ -34,7 +34,7 @@ body {
     padding: 40px 20px;
 }
 
-/* TITRE PRINCIPAL */
+/* titre pricni */
 h1 {
     font-size: 3rem;
     color: #e0e6e9;
@@ -43,7 +43,7 @@ h1 {
     animation: fadeInUp 1s ease forwards;
 }
 
-/* BOUTON MENU */
+
 .menu {
     display: inline-block;
     padding: 12px 28px;
@@ -62,7 +62,7 @@ h1 {
     transform: scale(1.05);
 }
 
-/* SECTIONS DE TEXTE */
+
 .deb, #competences {
     background-color: rgba(255, 255, 255, 0.9);
     color: #2e4053;
@@ -75,7 +75,7 @@ h1 {
     animation: fadeInUp 1.5s ease forwards;
 }
 
-/* TEXTE SIMPLE */
+
 .text {
     margin-bottom: 0;
 }
@@ -106,7 +106,7 @@ h1 {
     animation: fadeInUp 1.7s ease forwards;
 }
 .parcours li {
-    margin-bottom: 18px;
+    margin-bottom: 18px;    
     position: relative;
     padding-left: 25px;
     cursor: default;
@@ -119,13 +119,6 @@ h1 {
     font-weight: bold;
     font-size: 1.2rem;
     transition: color 0.3s ease;
-}
-.parcours li:hover::before {
-    color: #1c2833;
-}
-.parcours li:hover {
-    transform: translateX(10px);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
 }
 
 /* FOOTER */

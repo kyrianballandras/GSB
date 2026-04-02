@@ -7,7 +7,7 @@
   <link rel="icon" href="assets/image/moi.png">
   <link rel="stylesheet" href="assets/css/portfolio.css">
   <style>
-    /* Styles rapides pour les trois points / menu contextual */
+    /* css relier aussi avec proflio.css */
     .project { position: relative; overflow: hidden; border-radius: 8px; }
     .project .project-meta { position: absolute; top: 8px; right: 8px; z-index: 5; }
     .dots-btn {
@@ -34,9 +34,14 @@
     .dots-menu a:last-child { border-bottom: none; }
     .dots-menu a:hover { background: rgba(255,255,255,0.03); }
     .project img { width:100%; height:200px; object-fit:cover; display:block; border-radius:6px; }
-    @media (min-width:900px) {
-      .project img { height:220px; }
-    }
+     .project img { width:100%; height:200px; object-fit:cover; display:block; border-radius:6px; }
+        .hero-content {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 40px;
+        }
+      </style>
   </style>
 </head>
 <body>
@@ -44,22 +49,20 @@
     <div class="container header-inner">
       <nav>
          <ul class="menu">
-        <li><a href="#introduction">Introduction</a></li>
         <li><a href="presentation personnel.html">Présentation personnelle</a></li>
-        <li><a href="projet.html">Mes Projets </a></li>
         <li><a href="compétences.html">Compétences</a></li>
         <li><a href="contact.html">Contact</a></li>
+        <li><a href="ia.html">Article de Veille</a><li>
         </ul>
       </nav>
-      <!-- bouton thème supprimé -->
     </div>
   </header>
 
   <main class="container">
     <section id="hero" class="hero card">
       <div class="hero-content">
-        <h1>Kyrian Ballandras<br><span>Développeur / Veille technologique</span></h1>
-        <img src="assets/image/moi.png" alt="Photo de Kyrian">
+        <h1>Kyrian Ballandras<br>Étudiant BTS SIO</h1>
+        <img src="assets/image/moi.png" alt="Photo de Kyrian" style="width: 250px; height: 250px; border-radius: 50%;">
         <div class="arrow-down" title="Descendre"></div>
       </div>
     </section>
@@ -67,39 +70,43 @@
     <section id="introduction" class="card intro fade-up">
       <h2>Introduction</h2>
       <p>
-        Étudiant / développeur passionné par l'IA appliquée à l'automobile, la cybersécurité et les interfaces web.
-        Ce portfolio présente mes compétences, projets et une page dédiée à ma veille sur l'IA automobile.
-      </p>
+        Actuellement en BTS Services Informatiques aux Organisations (SIO), ce portfolio présente mon parcours,<br>
+mes compétences et les projets réalisés au cours de ma formation.<br>
+Venant d'un Bac Pro Systèmes Numériques option RISC, j'ai acquis de bonnes bases en informatique, réseaux et maintenance,<br>
+mais j'ai décidé de me lancer dans le développement en option SLAM.<br>
+Ce portfolio met en avant mes compétences acquises ainsi que mon évolution professionnelle dans le développement.<br>
+Il reflète également mon intérêt pour les nouvelles technologies et ma motivation à poursuivre dans le domaine de l’informatique.
     </section>
 
     <section id="competences" class="card">
       <h2>Compétences</h2>
       <div class="cards">
-        <div class="card"><h3>Programmation</h3><p>PHP, JavaScript, Python, SQL</p></div>
-        <div class="card"><h3>IA / ML</h3><p>TensorFlow, scikit-learn, PyTorch</p></div>
-        <div class="card"><h3>Web</h3><p>HTML5, CSS3, responsive, animations</p></div>
-        <div class="card"><h3>Outils</h3><p>Git, Docker, VS Code, XAMPP</p></div>
+        <div class="card"><h3>Programmation(en cours BTS)</h3><p>PHP,Java,JavaScript, Python, mySQL</p></div>
+        <div class="card"><h3>BAC Pro SN</h3><p>Réseaux,Sytèmes,Configuration,Maintenance,Support Technique,Virtualisation</p></div>
+        <div class="card"><h3>Web(En cours BTS)</h3><p>HTML5, CSS3,</p></div>
+        <div class="card"><h3>Outils</h3><p>Git, VS Code, XAMPP</p></div>
+        <div class="card">
+          <h3>Mon CV : <a href="assets/image/CVKB.pdf">CV Kyrian Ballandras</a></h3></div>
       </div>
     </section>
 
     <section id="projets" class="card">
       <h2>Projets</h2>
       <div class="project-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;">
-        <!-- Projet 1 -->
+        <!-- projet 1 -->
         <article class="project">
           <div class="project-meta">
-            <button class="dots-btn" aria-expanded="false" aria-haspopup="true" title="Actions">⋯</button>
+            
             <div class="dots-menu" role="menu">
-              <a href="veille-iaautomobile.html" role="menuitem">Voir la veille</a>
-              <a href="#" role="menuitem">Détails</a>
-              <a href="#" role="menuitem">Voir sur GitHub</a>
             </div>
           </div>
-          <a href="veille-ia-automobile.html" class="project-link" style="text-decoration:none;color:inherit;">
-            <img src="assets/image/ia-auto.png" alt="Veille IA automobile">
+          <a href="ia.html" class="project-link" style="text-decoration:none;color:inherit;">
+            <img src="assets/image/iaauto.jpg" alt="Veille IA automobile">
             <div style="padding:12px;">
-              <h3>Veille — IA Automobile</h3>
-              <p>Analyse des avancées en perception, décision et sécurité pour véhicules autonomes.</p>
+              <h3>L’IA Embarquer dans l’automobile</h3>
+              <p>	Acquisition d’information : prise de conscience, détection & accès aux sources <br>
+                  Transmission & Stockage : gestion interne <br>
+                  Synthèse des informations collectées <br></p>
             </div>
           </a>
         </article>
@@ -107,18 +114,16 @@
         <!-- Projet 2 -->
         <article class="project">
           <div class="project-meta">
-            <button class="dots-btn" aria-expanded="false" aria-haspopup="true" title="Actions">⋯</button>
+           
             <div class="dots-menu" role="menu">
-              <a href="#" role="menuitem">Voir</a>
-              <a href="#" role="menuitem">Détails</a>
-              <a href="#" role="menuitem">Voir sur GitHub</a>
+              <a href="#C:\xampp\htdocs\bts_sio_2annee\gsbcompterendu\login.php" role="menuitem">Ouvrir</a>
             </div>
           </div>
-          <a href="#" class="project-link" style="text-decoration:none;color:inherit;">
-            <img src="assets/image/project2.png" alt="Projet 2">
+          <a href="#C:\xampp\htdocs\bts_sio_2annee\gsbcompterendu\welcome.php" class="project-link" style="text-decoration:none;color:inherit;">
+            <img src="assets/image/gsb.jpg" alt="Projet 2">
             <div style="padding:12px;">
-              <h3>Projet Web</h3>
-              <p>Application de gestion — PHP / MySQL, interface responsive et sécurisée.</p>
+              <h3>Projet Application Web et Mobile</h3>
+              <p>Application de gestion — PHP / MySQL / HTML et CSS/ Android Studio, interface responsive et sécurisée.</p>
             </div>
           </a>
         </article>
@@ -126,18 +131,68 @@
         <!-- Projet 3 -->
         <article class="project">
           <div class="project-meta">
-            <button class="dots-btn" aria-expanded="false" aria-haspopup="true" title="Actions">⋯</button>
+            
             <div class="dots-menu" role="menu">
-              <a href="#" role="menuitem">Voir</a>
-              <a href="#" role="menuitem">Détails</a>
-              <a href="#" role="menuitem">Voir sur GitHub</a>
+             
             </div>
           </div>
-          <a href="#" class="project-link" style="text-decoration:none;color:inherit;">
-            <img src="assets/image/project3.png" alt="Projet 3">
+          <a href="bacpro.html" class="project-link" style="text-decoration:none;color:inherit;">
+            <img src="assets/image/bacp.png" alt="Projet 3">
             <div style="padding:12px;">
-              <h3>Maintenance Outils Informatique</h3>
-              <p>Porjet Pour mon BacPro</p>
+              <h3>Bac Pro Sytèmes Numérique</h3>
+              <p>Le Bac Pro Systèmes Numériques (option RISC) consistant à installer, configurer et maintenir un réseau informatique
+                   <br> Mise en place des équipements réseaux, des services de base (adressage IP, partage de ressources, sécurité).
+                    <br>Diagnostic des pannes et de la documentation technique liée au projet.</p>
+            </div>
+          </a>
+        </article>
+         <!-- Projet 4 -->
+        <article class="project">
+          <div class="project-meta">
+           
+            <div class="dots-menu" role="menu">
+              <a href="#C:\xampp\htdocs\bts_sio_2annee\gsbcompterendu\login.php" role="menuitem">Ouvrir</a>
+            </div>
+          </div>
+          <a href="#C:\xampp\htdocs\bts_sio_2annee\gsbcompterendu\welcome.php" class="project-link" style="text-decoration:none;color:inherit;">
+            <img src="assets/image/grafa.jpg" alt="Projet 4">
+            <div style="padding:12px;">
+              <h3>Déploiement et configuration d’une visualisation réseau avec Grafana MapGL</h3>
+              <p>Durant mon stage, j’ai installé et configuré un plugin MapGL sur Grafana afin de visualiser une infrastructure réseau sur une carte. J’ai utilisé Prometheus pour collecter les données et des fichiers YAML pour configurer l’affichage des équipements et des flux réseau.</p>
+            </div>
+          </a>
+        </article>
+         <!-- Projet 5 -->
+        <article class="project">
+          <div class="project-meta">
+           
+            <div class="dots-menu" role="menu">
+              <a href="#C:\xampp\htdocs\bts_sio_2annee\gsbcompterendu\login.php" role="menuitem">Ouvrir</a>
+            </div>
+          </div>
+          <a href="#C:\xampp\htdocs\bts_sio_2annee\gsbcompterendu\welcome.php" class="project-link" style="text-decoration:none;color:inherit;">
+            <img src="assets/image/java.png" alt="Projet 5">
+            <div style="padding:12px;">
+              <h3>Étude des algorithmes de dérivation de clés et du chiffrement en Java</h3>
+              <p>Ce projet consiste à comprendre et implémenter des techniques de dérivation 
+                de clés cryptographiques ainsi que différents modes de chiffrement (comme AES en CBC et GCM). 
+                L’objectif était de comparer leur sécurité et leurs performances dans un contexte réel.</p>
+            </div>
+          </a>
+        </article>
+         <!-- Projet 6 -->
+        <article class="project">
+          <div class="project-meta">
+           
+            <div class="dots-menu" role="menu">
+              <a href="C:\xampp\htdocs\bts_sio_2annee\audiquattroatelierpro\audipre.html" role="menuitem">Ouvrir</a>
+            </div>
+          </div>
+          <a href="C:\xampp\htdocs\bts_sio_2annee\audiquattroatelierpro\audipre.html" class="project-link" style="text-decoration:none;color:inherit;">
+            <img src="assets/image/audi.jpg" alt="Projet 6">
+            <div style="padding:12px;">
+              <h3>L'histoire De Audi</h3>
+              <p>Création d'un site parlant de la connaissance dans le savoir au début et actuellement de chez Audi une marque appartenant au groupe </p>
             </div>
           </a>
         </article>
@@ -147,35 +202,10 @@
 
   <footer class="site-footer">
     <div class="container">
-      <p>&copy; <?= date('Y') ?> Kyrian Ballandras — Portfolio</p>
+     <p>&copy; 2026 Ballandras Kyrian. Tous droits réservés.</p>
     </div>
   </footer>
 
-  <script>
-    // JS léger pour gérer les menus "trois points"
-    document.addEventListener('click', function(e){
-      // fermer tous les menus si clic en dehors
-      if (!e.target.closest('.project')) {
-        document.querySelectorAll('.dots-menu').forEach(m => m.classList.remove('active'));
-        document.querySelectorAll('.dots-btn').forEach(b => b.setAttribute('aria-expanded', 'false'));
-        return;
-      }
-      const project = e.target.closest('.project');
-      const btn = project.querySelector('.dots-btn');
-      const menu = project.querySelector('.dots-menu');
-      if (e.target === btn || btn.contains(e.target)) {
-        const active = menu.classList.toggle('active');
-        btn.setAttribute('aria-expanded', active ? 'true' : 'false');
-      }
-    });
-
-    // Fermer menu avec Escape
-    document.addEventListener('keydown', function(e){
-      if (e.key === 'Escape') {
-        document.querySelectorAll('.dots-menu').forEach(m => m.classList.remove('active'));
-        document.querySelectorAll('.dots-btn').forEach(b => b.setAttribute('aria-expanded', 'false'));
-      }
-    });
-  </script>
+  
 </body>
 </html>
