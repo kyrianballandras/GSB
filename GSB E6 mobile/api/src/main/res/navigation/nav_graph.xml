@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/accueilFragment">
+
+    <fragment
+        android:id="@+id/accueilFragment"
+        android:name="com.example.connexionvolley.AccueilFragment"
+        android:label="Bienvenue"/>
+
+    <fragment
+        android:id="@+id/rapportsFragment"
+        android:name="com.example.connexionvolley.RapportsFragment"
+        android:label="Rapport"/>
+
+    <fragment
+        android:id="@+id/saisieRapportFragment"
+        android:name="com.example.connexionvolley.SaisieRapportFragment"
+        android:label="Saisit de Rapport"/>
+
+    <fragment
+        android:id="@+id/profilFragment"
+        android:name="com.example.connexionvolley.ProfilFragment"
+        android:label="Mon profil"/>
+
+    <fragment
+        android:id="@+id/produitsFragment"
+        android:name="com.example.connexionvolley.ProduitsFragment"
+        android:label="Produits"/>
+
+    <fragment
+        android:id="@+id/gestionUsersFragment"
+        android:name="com.example.connexionvolley.GestionUsersFragment"
+        android:label="Gestion utilisateurs"/>
+
+    <fragment
+        android:id="@+id/ajouterProduitFragment"
+        android:name="com.example.connexionvolley.AjouterProduitFragment"
+        android:label="Ajouter un produit"/>
+
+</navigation>

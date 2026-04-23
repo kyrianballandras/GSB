@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0F0F0">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Carte de bienvenue -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@android:color/white"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:id="@+id/tvBonjour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bonjour"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#212121"/>
+
+            <TextView
+                android:id="@+id/tvRole"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="visiteur"
+                android:textSize="14sp"
+                android:textColor="#E53935"
+                android:textStyle="bold"
+                android:layout_marginTop="4dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bienvenue sur Galaxy Swiss Bourdin"
+                android:textSize="13sp"
+                android:textColor="#757575"
+                android:layout_marginTop="4dp"/>
+
+        </LinearLayout>
+
+        <!-- Raccourcis -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@android:color/white"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Raccourcis"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#212121"
+                android:layout_marginBottom="12dp"/>
+
+            <Button
+                android:id="@+id/btnProduits"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Voir les produits"
+                android:backgroundTint="#1976D2"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="8dp"/>
+
+            <Button
+                android:id="@+id/btnNouvelleSaisie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nouvelle saisie de rapport"
+                android:backgroundTint="#1976D2"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="8dp"/>
+
+            <Button
+                android:id="@+id/btnVoirRapports"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Voir mes comptes-rendus"
+                android:backgroundTint="#1976D2"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="8dp"/>
+
+            <Button
+                android:id="@+id/btnMonProfil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mon profil"
+                android:backgroundTint="#1976D2"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="8dp"/>
+
+            <!-- visible uniquement admin + responsable -->
+            <Button
+                android:id="@+id/btnAjouterProduit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ajouter un produit"
+                android:backgroundTint="#388E3C"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="8dp"
+                android:visibility="gone"/>
+
+            <!-- visible uniquement admin -->
+            <Button
+                android:id="@+id/btnGestionUsers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Gestion utilisateurs"
+                android:backgroundTint="#E65100"
+                android:textColor="@android:color/white"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

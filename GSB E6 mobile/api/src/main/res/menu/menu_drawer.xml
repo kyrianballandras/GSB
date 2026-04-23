@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/accueilFragment"
+        android:title="Bienvenue"/>
+
+    <item
+        android:id="@+id/rapportsFragment"
+        android:title="Rapport"/>
+
+    <item
+        android:id="@+id/saisieRapportFragment"
+        android:title="Saisit de Rapport"/>
+
+    <item
+        android:id="@+id/profilFragment"
+        android:title="Mon profil"/>
+
+    <item
+        android:id="@+id/produitsFragment"
+        android:title="Produits"/>
+
+    <item
+        android:id="@+id/gestionUsersFragment"
+        android:title="Gestion utilisateurs"/>
+
+    <item
+        android:id="@+id/ajouterProduitFragment"
+        android:title="Ajouter un produit"/>
+
+</menu>

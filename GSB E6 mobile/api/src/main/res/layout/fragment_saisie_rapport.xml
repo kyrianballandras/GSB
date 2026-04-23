@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0F0F0">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Saisir le Compte-rendu de Visite"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#1565C0"
+            android:layout_marginBottom="4dp"/>
+
+        <View android:layout_width="match_parent" android:layout_height="2dp"
+            android:background="#1976D2" android:layout_marginBottom="16dp"/>
+
+        <!-- Praticien visité -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Praticien visité *" android:layout_marginBottom="4dp"/>
+        <Spinner
+            android:id="@+id/spinnerPraticien"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/btn_dropdown"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- Date de visite -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Date de visite" android:layout_marginBottom="4dp"/>
+        <EditText
+            android:id="@+id/etDateVisite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="jj/mm/aaaa"
+            android:inputType="date"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- Motif -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Motif de la visite *" android:layout_marginBottom="4dp"/>
+        <Spinner
+            android:id="@+id/spinnerMotif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/btn_dropdown"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- Remplaçant -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Remplaçant (si absent)" android:layout_marginBottom="4dp"/>
+        <EditText
+            android:id="@+id/etRemplacant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nom complet"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Produits présentés (max 2, comme cr_new.php) -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Produits présentés (max 2)"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Produit 1" android:layout_marginBottom="4dp"/>
+        <Spinner android:id="@+id/spinnerProduit1"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:background="@android:drawable/btn_dropdown"
+            android:layout_marginBottom="12dp"/>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Produit 2" android:layout_marginBottom="4dp"/>
+        <Spinner android:id="@+id/spinnerProduit2"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:background="@android:drawable/btn_dropdown"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Distribution des Échantillons (comme cr_new.php : echantillons[id_produit] = quantite) -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Distribution des Échantillons"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:layout_marginBottom="8dp"/>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:layout_marginBottom="4dp">
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="2" android:text="Produit" android:textStyle="bold"/>
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:text="Quantité" android:textStyle="bold"/>
+        </LinearLayout>
+
+        <!-- id 1 = Doliprane, id 2 = Lysopaïne, id 3 = Smecta (selon la base de données) -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:layout_marginBottom="6dp">
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="2" android:text="Doliprane" android:gravity="center_vertical"/>
+            <EditText android:id="@+id/etEch1" android:layout_width="0dp"
+                android:layout_height="wrap_content" android:layout_weight="1"
+                android:hint="0" android:inputType="number"/>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:layout_marginBottom="6dp">
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="2" android:text="Lysopaïne" android:gravity="center_vertical"/>
+            <EditText android:id="@+id/etEch2" android:layout_width="0dp"
+                android:layout_height="wrap_content" android:layout_weight="1"
+                android:hint="0" android:inputType="number"/>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:layout_marginBottom="16dp">
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="2" android:text="Smecta" android:gravity="center_vertical"/>
+            <EditText android:id="@+id/etEch3" android:layout_width="0dp"
+                android:layout_height="wrap_content" android:layout_weight="1"
+                android:hint="0" android:inputType="number"/>
+        </LinearLayout>
+
+        <!-- Bilan -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Bilan de la visite" android:layout_marginBottom="4dp"/>
+        <EditText
+            android:id="@+id/etBilan"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:hint="Résumé de la visite, observations..."
+            android:gravity="top"
+            android:inputType="textMultiLine"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Bouton valider -->
+        <Button
+            android:id="@+id/btnValiderSaisie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="VALIDER LA SAISIE"
+            android:backgroundTint="#1976D2"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+</ScrollView>
