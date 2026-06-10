@@ -27,6 +27,13 @@ public class ProduitsFragment extends Fragment {
 
     RequestQueue queue;
     LinearLayout tableau;
+    private boolean chargementEnCours = false;
+
+    private void showToast(String msg) {
+        if (isAdded() && getContext() != null) {
+            Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,17 +44,25 @@ public class ProduitsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        queue   = Volley.newRequestQueue(getContext());
+        queue   = Volley.newRequestQueue(requireContext());
         tableau = view.findViewById(R.id.tableauProduits);
-
-        // on charge la liste des produits depuis la BDD
         chargerProduits();
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (queue != null) queue.cancelAll(this);
+    }
+
     private void chargerProduits() {
+        if (chargementEnCours) return;
+        chargementEnCours = true;
 
         StringRequest requete = new StringRequest(Request.Method.POST, urlProduits,
                 response -> {
+                    chargementEnCours = false;
+                    if (!isAdded()) return;
                     try {
                         JSONObject json = new JSONObject(response);
                         int status = json.getInt("status");
@@ -55,17 +70,19 @@ public class ProduitsFragment extends Fragment {
                             JSONArray liste = json.getJSONArray("produits");
                             afficherProduits(liste);
                         } else {
-                            Toast.makeText(getContext(), "Impossible de charger les produits", Toast.LENGTH_SHORT).show();
+                            showToast("Impossible de charger les produits");
                         }
                     } catch (JSONException e) {
-                        Toast.makeText(getContext(), "Erreur de réponse serveur", Toast.LENGTH_SHORT).show();
+                        showToast("Erreur de réponse serveur");
                     }
                 },
                 error -> {
+                    chargementEnCours = false;
+                    if (!isAdded()) return;
                     if (error.networkResponse != null) {
-                        Toast.makeText(getContext(), "Erreur serveur HTTP " + error.networkResponse.statusCode, Toast.LENGTH_LONG).show();
+                        showToast("Erreur HTTP " + error.networkResponse.statusCode);
                     } else {
-                        Toast.makeText(getContext(), "Fichier produitsapi.php introuvable ou pas de connexion", Toast.LENGTH_LONG).show();
+                        showToast("Pas de connexion au serveur");
                     }
                 }) {
 
@@ -77,6 +94,7 @@ public class ProduitsFragment extends Fragment {
             }
         };
 
+        requete.setTag(this);
         queue.add(requete);
     }
 
@@ -89,11 +107,11 @@ public class ProduitsFragment extends Fragment {
             try {
                 JSONObject p = liste.getJSONObject(i);
 
-                String id               = p.optString("id", "");
-                String nom              = p.optString("nom", "");
-                String composition      = p.optString("composition", "");
-                String effets           = p.optString("effets", "");
-                String contreIndic      = p.optString("contre_indications", "");
+                String id          = p.optString("id", "");
+                String nom         = p.optString("nom", "");
+                String composition = p.optString("composition", "");
+                String effets      = p.optString("effets", "");
+                String contreIndic = p.optString("contre_indications", "");
 
                 LinearLayout row = new LinearLayout(getContext());
                 row.setOrientation(LinearLayout.HORIZONTAL);
@@ -116,7 +134,7 @@ public class ProduitsFragment extends Fragment {
                 tableau.addView(row);
 
             } catch (JSONException e) {
-                // on passe si une ligne est mal formée
+                // ligne mal formée, on passe
             }
         }
 

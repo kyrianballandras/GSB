@@ -17,17 +17,24 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SaisieRapportFragment extends Fragment {
 
-    // URL de l'API compte-rendu
-    String urlCr = "https://portfoliokball.fr/portofolio/gsbcompterendu/crapi.php";
+    String urlCr       = "https://portfoliokball.fr/portofolio/gsbcompterendu/crapi.php";
+    String urlProduits = "https://portfoliokball.fr/portofolio/gsbcompterendu/produitsapi.php";
 
     RequestQueue queue;
+
+    // liste des produits chargés depuis l'API
+    List<String>  nomsProduits = new ArrayList<>();
+    List<Integer> idsProduits  = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,101 +46,111 @@ public class SaisieRapportFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         DrawerActivity activity = (DrawerActivity) getActivity();
-        queue = Volley.newRequestQueue(getContext());
+        queue = Volley.newRequestQueue(requireContext());
 
-        // --- spinner praticien avec IDs correspondant à la BDD ---
-        // ordre : affichage / id en BDD
+        // ── Spinner praticien ──
         Spinner spPraticien = view.findViewById(R.id.spinnerPraticien);
         String[] nomsPraticiens = {"Sélectionnez", "Delahaye Didier", "Gosselin Hélène", "Nahdel Jean", "Notini Alain"};
-        int[]    idsPraticiens  = {0,               4,                 3,                 1,             2};
-        ArrayAdapter<String> adapterPrat = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, nomsPraticiens);
+        int[]    idsPraticiens  = {0, 4, 3, 1, 2};
+        ArrayAdapter<String> adapterPrat = new ArrayAdapter<>(requireContext(),
+                android.R.layout.simple_spinner_item, nomsPraticiens);
         adapterPrat.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spPraticien.setAdapter(adapterPrat);
 
-        // --- spinner motif ---
+        // ── Spinner motif ──
         Spinner spMotif = view.findViewById(R.id.spinnerMotif);
         String[] motifs = {"Sélectionnez un motif", "periodicite", "remontage"};
-        ArrayAdapter<String> adapterMotif = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, motifs);
+        ArrayAdapter<String> adapterMotif = new ArrayAdapter<>(requireContext(),
+                android.R.layout.simple_spinner_item, motifs);
         adapterMotif.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spMotif.setAdapter(adapterMotif);
 
-        // --- champs de saisie ---
+        // ── Spinners produits (remplis après chargement API) ──
+        Spinner  spProduit1 = view.findViewById(R.id.spinnerProduit1);
+        Spinner  spProduit2 = view.findViewById(R.id.spinnerProduit2);
+        EditText etQte1     = view.findViewById(R.id.etQteProduit1);
+        EditText etQte2     = view.findViewById(R.id.etQteProduit2);
+
+        // ── Autres champs ──
         EditText etDate      = view.findViewById(R.id.etDateVisite);
         EditText etBilan     = view.findViewById(R.id.etBilan);
         EditText etRemplacant = view.findViewById(R.id.etRemplacant);
+        Button   btnValider  = view.findViewById(R.id.btnValiderSaisie);
 
-        // --- échantillons (id produit 1=Doliprane, 2=Lysopaïne, 3=Smecta) ---
-        EditText etEch1 = view.findViewById(R.id.etEch1);
-        EditText etEch2 = view.findViewById(R.id.etEch2);
-        EditText etEch3 = view.findViewById(R.id.etEch3);
+        // ── Charger les produits depuis l'API ──
+        chargerProduits(spProduit1, spProduit2);
 
-        Button btnValider = view.findViewById(R.id.btnValiderSaisie);
-
+        // ── Bouton valider ──
         btnValider.setOnClickListener(v -> {
 
-            // vérifications
             int indexPrat = spPraticien.getSelectedItemPosition();
-            if (indexPrat == 0) {
-                Toast.makeText(getContext(), "Choisissez un praticien", Toast.LENGTH_SHORT).show();
-                return;
-            }
+            if (indexPrat == 0) { showToast("Choisissez un praticien"); return; }
+
             String dateVisite = etDate.getText().toString().trim();
-            if (dateVisite.isEmpty()) {
-                Toast.makeText(getContext(), "Entrez la date de la visite", Toast.LENGTH_SHORT).show();
-                return;
-            }
+            if (dateVisite.isEmpty()) { showToast("Entrez la date de la visite"); return; }
 
             int    idPraticien = idsPraticiens[indexPrat];
             String motif       = spMotif.getSelectedItem().toString();
             String bilan       = etBilan.getText().toString().trim();
             String remplacant  = etRemplacant.getText().toString().trim();
+            String dateMysql   = convertirDate(dateVisite);
 
-            // conversion date jj/mm/aaaa → aaaa-mm-jj pour MySQL
-            String dateMysql = convertirDate(dateVisite);
+            // Construire la map des échantillons sélectionnés
+            final Map<Integer, Integer> echantillons = new HashMap<>();
 
-            // quantités échantillons
-            String ech1 = etEch1.getText().toString().trim().isEmpty() ? "0" : etEch1.getText().toString().trim();
-            String ech2 = etEch2.getText().toString().trim().isEmpty() ? "0" : etEch2.getText().toString().trim();
-            String ech3 = etEch3.getText().toString().trim().isEmpty() ? "0" : etEch3.getText().toString().trim();
+            int indexP1 = spProduit1.getSelectedItemPosition();
+            int indexP2 = spProduit2.getSelectedItemPosition();
 
-            // envoi de la requête POST à crapi.php
+            // position 0 = "— Aucun —", donc on décale de 1
+            if (!idsProduits.isEmpty() && indexP1 > 0) {
+                String qteStr = etQte1.getText().toString().trim();
+                int qte = qteStr.isEmpty() ? 0 : Integer.parseInt(qteStr);
+                if (qte > 0) echantillons.put(idsProduits.get(indexP1 - 1), qte);
+            }
+            if (!idsProduits.isEmpty() && indexP2 > 0) {
+                String qteStr = etQte2.getText().toString().trim();
+                int qte = qteStr.isEmpty() ? 0 : Integer.parseInt(qteStr);
+                if (qte > 0) echantillons.put(idsProduits.get(indexP2 - 1), qte);
+            }
+
+            // Envoi du compte-rendu
             StringRequest requete = new StringRequest(Request.Method.POST, urlCr,
                     response -> {
+                        if (!isAdded()) return;
                         try {
                             JSONObject json = new JSONObject(response);
-                            int status = json.getInt("status");
-                            if (status == 200) {
-                                Toast.makeText(getContext(), "Compte-rendu enregistré !", Toast.LENGTH_SHORT).show();
+                            if (json.getInt("status") == 200) {
+                                showToast("Compte-rendu enregistré !");
                                 NavHostFragment.findNavController(this).navigate(R.id.accueilFragment);
                             } else {
-                                String msg = json.optString("message", "Erreur lors de l'enregistrement");
-                                Toast.makeText(getContext(), msg, Toast.LENGTH_LONG).show();
+                                showToast(json.optString("message", "Erreur lors de l'enregistrement"));
                             }
                         } catch (JSONException e) {
-                            Toast.makeText(getContext(), "Erreur de réponse serveur", Toast.LENGTH_LONG).show();
+                            showToast("Erreur de réponse serveur");
                         }
                     },
                     error -> {
+                        if (!isAdded()) return;
                         if (error.networkResponse != null) {
-                            Toast.makeText(getContext(), "Erreur serveur HTTP " + error.networkResponse.statusCode, Toast.LENGTH_LONG).show();
+                            showToast("Erreur HTTP " + error.networkResponse.statusCode);
                         } else {
-                            Toast.makeText(getContext(), "Fichier crapi.php introuvable ou pas de connexion", Toast.LENGTH_LONG).show();
+                            showToast("Pas de connexion au serveur");
                         }
                     }) {
-
                 @Override
                 protected Map<String, String> getParams() {
                     Map<String, String> params = new HashMap<>();
-                    params.put("action", "ajouter");
-                    params.put("id_visiteur",  String.valueOf(activity.userId));
-                    params.put("id_praticien", String.valueOf(idPraticien));
-                    params.put("date_visite",  dateMysql);
-                    params.put("motif",        motif);
-                    params.put("bilan",        bilan);
+                    params.put("action",        "ajouter");
+                    params.put("id_visiteur",   String.valueOf(activity.userId));
+                    params.put("id_praticien",  String.valueOf(idPraticien));
+                    params.put("date_visite",   dateMysql);
+                    params.put("motif",         motif);
+                    params.put("bilan",         bilan);
                     params.put("id_remplacant", remplacant);
-                    params.put("ech_1", ech1); // Doliprane
-                    params.put("ech_2", ech2); // Lysopaïne
-                    params.put("ech_3", ech3); // Smecta
+                    // envoyer chaque échantillon sélectionné : ech_<id_produit> = quantité
+                    for (Map.Entry<Integer, Integer> e : echantillons.entrySet()) {
+                        params.put("ech_" + e.getKey(), String.valueOf(e.getValue()));
+                    }
                     return params;
                 }
             };
@@ -142,18 +159,61 @@ public class SaisieRapportFragment extends Fragment {
         });
     }
 
+    // charge les produits et remplit sp1 + sp2
+    private void chargerProduits(Spinner sp1, Spinner sp2) {
+        StringRequest requete = new StringRequest(Request.Method.POST, urlProduits,
+                response -> {
+                    if (!isAdded()) return;
+                    try {
+                        JSONObject json = new JSONObject(response);
+                        if (json.getInt("status") == 200) {
+                            JSONArray liste = json.getJSONArray("produits");
+
+                            nomsProduits.clear();
+                            idsProduits.clear();
+                            nomsProduits.add("— Aucun —"); // position 0 = pas de produit
+
+                            for (int i = 0; i < liste.length(); i++) {
+                                JSONObject p = liste.getJSONObject(i);
+                                nomsProduits.add(p.optString("nom", "Produit"));
+                                idsProduits.add(p.optInt("id", i + 1));
+                            }
+
+                            ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(),
+                                    android.R.layout.simple_spinner_item, nomsProduits);
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            sp1.setAdapter(adapter);
+                            sp2.setAdapter(adapter);
+                        }
+                    } catch (JSONException e) {
+                        showToast("Erreur chargement produits");
+                    }
+                },
+                error -> {
+                    if (!isAdded()) return;
+                    showToast("Impossible de charger les produits");
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("action", "liste");
+                return params;
+            }
+        };
+        queue.add(requete);
+    }
+
+    private void showToast(String msg) {
+        if (isAdded() && getContext() != null) {
+            Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+        }
+    }
+
     // convertit "jj/mm/aaaa" en "aaaa-mm-jj" pour MySQL
     private String convertirDate(String date) {
-        // si déjà au bon format ou vide, on renvoie tel quel
-        if (date.length() != 10) {
-            return date;
-        }
-        if (date.contains("/")) {
-            // format jj/mm/aaaa
+        if (date.length() == 10 && date.contains("/")) {
             String[] parts = date.split("/");
-            if (parts.length == 3) {
-                return parts[2] + "-" + parts[1] + "-" + parts[0];
-            }
+            if (parts.length == 3) return parts[2] + "-" + parts[1] + "-" + parts[0];
         }
         return date;
     }

@@ -9,8 +9,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.HashMap;
@@ -18,16 +20,11 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    // IDs exacts de activity_main.xml
-    // champ email  → R.id.login
-    // champ mdp    → R.id.password
-    // bouton       → R.id.connexion
     EditText etUser, etMdp;
     Button btnLogin;
     ProgressDialog chargement;
     RequestQueue queue;
 
-    // URL de la vraie API GSB
     String urlApi = "https://portfoliokball.fr/portofolio/gsbcompterendu/loginapi.php";
 
     @Override
@@ -35,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        etUser   = findViewById(R.id.login);      // champ email dans le XML
-        etMdp    = findViewById(R.id.password);   // champ mot de passe
-        btnLogin = findViewById(R.id.connexion);  // bouton connexion
+        etUser   = findViewById(R.id.login);
+        etMdp    = findViewById(R.id.password);
+        btnLogin = findViewById(R.id.connexion);
 
         queue = Volley.newRequestQueue(this);
 
@@ -61,9 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
             chargement.show();
 
-            // requête POST vers l'API GSB
-            StringRequest requete = new StringRequest(Request.Method.POST,
-                    urlApi,
+            StringRequest requete = new StringRequest(Request.Method.POST, urlApi,
                     response -> {
                         chargement.dismiss();
                         try {
@@ -71,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
                             int status = json.getInt("status");
 
                             if (status == 200) {
-                                // les données utilisateur sont dans l'objet "user"
                                 JSONObject user = json.getJSONObject("user");
 
                                 int    userId = user.optInt("id", 0);
@@ -79,10 +73,9 @@ public class MainActivity extends AppCompatActivity {
                                 String nom    = user.optString("nom", "");
                                 String email  = user.optString("login", userVar);
                                 String role   = user.optString("role", "visiteur");
-                                // le token est à la racine du JSON
                                 String token  = json.optString("token", "");
 
-                                // on lance DrawerActivity avec les infos utilisateur
+                                // on passe les infos a DrawerActivity
                                 Intent intent = new Intent(MainActivity.this, DrawerActivity.class);
                                 intent.putExtra("userId", userId);
                                 intent.putExtra("prenom", prenom);
@@ -93,24 +86,38 @@ public class MainActivity extends AppCompatActivity {
                                 startActivity(intent);
 
                             } else {
-                                // status 401 = identifiants incorrects
                                 String msg = json.optString("message", "Email ou mot de passe incorrect");
                                 Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
                             }
 
                         } catch (JSONException e) {
-                            Toast.makeText(this, "Erreur lors de la lecture de la réponse", Toast.LENGTH_LONG).show();
+                            Toast.makeText(this, "Erreur lecture réponse", Toast.LENGTH_LONG).show();
                         }
                     },
                     error -> {
                         chargement.dismiss();
-                        Toast.makeText(this, "Erreur réseau. Vérifiez votre connexion.", Toast.LENGTH_LONG).show();
+                        String message = "Erreur réseau";
+
+                        if (error.networkResponse != null) {
+                            int statusCode = error.networkResponse.statusCode;
+                            message = "Erreur " + statusCode;
+                            try {
+                                String body = new String(error.networkResponse.data, "UTF-8");
+                                JSONObject res = new JSONObject(body);
+                                if (res.has("message")) message += " : " + res.getString("message");
+                            } catch (Exception e) {
+                                Log.e("LOGIN", e.toString());
+                            }
+                        } else if (error.getMessage() != null) {
+                            message = error.getMessage();
+                        }
+
+                        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
                     }) {
 
                 @Override
                 protected Map<String, String> getParams() {
                     Map<String, String> params = new HashMap<>();
-                    // l'API attend "login" (pas "email") et "password"
                     params.put("login", userVar);
                     params.put("password", mdpVar);
                     return params;
@@ -121,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // quand on revient sur MainActivity (déconnexion)  on vide le mot de passe
+    // retour sur le login = on vide le mdp
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);

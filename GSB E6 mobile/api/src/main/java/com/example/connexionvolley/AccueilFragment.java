@@ -1,5 +1,6 @@
 package com.example.connexionvolley;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,11 +58,19 @@ public class AccueilFragment extends Fragment {
                 NavHostFragment.findNavController(this).navigate(R.id.ajouterProduitFragment));
         }
 
-        //  ladmin peut gérer les utilisateur
+        // admin peut gérer les utilisateurs
         if (activity.userRole.equals("administrateur")) {
             btnGestionUsers.setVisibility(View.VISIBLE);
             btnGestionUsers.setOnClickListener(v ->
                 NavHostFragment.findNavController(this).navigate(R.id.gestionUsersFragment));
         }
+
+        // Bouton déconnexion → retour à la page de login
+        Button btnDeconnexion = view.findViewById(R.id.btnDeconnexion);
+        btnDeconnexion.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        });
     }
 }

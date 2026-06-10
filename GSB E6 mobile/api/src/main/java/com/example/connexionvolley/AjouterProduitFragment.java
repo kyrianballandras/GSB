@@ -22,7 +22,6 @@ import java.util.Map;
 
 public class AjouterProduitFragment extends Fragment {
 
-    // URL de l'API produits (même serveur que le login)
     String urlProduits = "https://portfoliokball.fr/portofolio/gsbcompterendu/produitsapi.php";
 
     RequestQueue queue;
@@ -58,7 +57,7 @@ public class AjouterProduitFragment extends Fragment {
                 return;
             }
 
-            // envoi POST à l'API
+            // envoi a l'API
             StringRequest requete = new StringRequest(Request.Method.POST, urlProduits,
                     response -> {
                         try {
